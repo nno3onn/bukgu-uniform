@@ -1,0 +1,59 @@
+.entrancePage-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.entrancePage-bookie {
+  width: 128px;
+  height: 128px;
+}
+
+.entrancePage-title {
+  font-size: 36px;
+  color: #FF4B62;
+  font-family: 'Jua', sans-serif;
+  margin-bottom: 48px;
+}
+
+.entrancePage-input-section {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 48px;
+}
+
+.entrancePage-input-label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #605C73;
+}
+
+.entrancePage-input {
+  font-size: 14px;
+  color: #444;
+  padding: 16px 0px;
+  border-bottom: solid 1px #C5C5D1;
+  margin-bottom: 36px;
+  &:focus {
+    border-bottom: 1px solid #FF4A68;
+  }
+}
+
+.entrancePage-sign-btn {
+  margin-top: 28px;
+  background: linear-gradient(91.1deg, #FF4A4A 0%, #FF4A68 100%);
+  border-radius: 8px;
+  padding: 16px 0px;
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  transition: 0.3s;
+  &:hover {
+    box-shadow: 0px 12px 36px -6px rgba(255, 74, 104, 0.45);
+  }
+}

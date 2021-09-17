@@ -1,0 +1,51 @@
+.nav-wrapper {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 52px;
+  background: #222222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.nav-contents {
+  width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-right-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-menu-active {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  margin-right: 36px;
+}
+
+.nav-menu {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.3);
+  margin-right: 36px;
+}
+
+.nav-signout-btn {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
