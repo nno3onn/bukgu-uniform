@@ -43,11 +43,16 @@
   font-size: 14px;
   font-weight: bold;
 }
+.uniform-label-wrapper {
+  border-bottom: 1px solid #ebebf0;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
 
-.uniform-label {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 24px;
+  .uniform-label {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 24px;
+  }
 }
 
 .uniform-giver-table-wrapper {
@@ -194,6 +199,10 @@ label.add {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    .dropdown-item {
+      width: 100px;
+    }
   }
   .size-input {
     margin-top: 16px;
@@ -350,10 +359,28 @@ label.add {
 }
 
 .uniform-reject-wrapper {
-  // border-bottom: 1px solid #ebebf0;
-  margin-bottom: 50px;  
+  border-top: 1px solid #ebebf0;
+  padding-top: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
+
+  .size-textarea {
+    cursor: auto;
+    margin-top: 16px;
+    margin-bottom: 30px;
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    border: 1px solid #e1e1e8;
+    transition: 0.3s;
+    resize: none;
+
+    &:focus {
+      border: 1px solid black;
+    }
+  }
 
   .uniform-btn-wrapper {
     display: flex;

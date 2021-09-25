@@ -242,9 +242,9 @@ const Home = () => {
                 <img src="/icon/search.png" onClick={handleSearch} />
               </button>
             </div>
-            <CSVSaver csvData={list} fileName="filename" />
             {table === "기부승인요청" ? (
               <div className={styles["filter-row"]}>
+                <CSVSaver csvData={list} fileName={table} />
                 <button
                   className={styles["filter-item"]}
                   onClick={handleFilter("전체")}

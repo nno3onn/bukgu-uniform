@@ -1,4 +1,4 @@
-const SERVER_PATH = "http://192.168.0.28:3001";
+const SERVER_PATH = "http://172.30.1.34:3001";
 const UPLOAD_PATH = `${SERVER_PATH}/api/uploads`;
 
 const ADMIN_PATH = `${SERVER_PATH}/api/admin`;

@@ -6,6 +6,7 @@ const UniformModel = require("models/uniform");
 const router = express.Router();
 
 router.put("/", isUserOrAdmin, async (req, res) => {
+  console.log("uniform update req.body:", req.body);
   try {
     const { uniformId } = req.query;
     const {

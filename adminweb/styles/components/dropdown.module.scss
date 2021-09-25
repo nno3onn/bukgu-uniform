@@ -1,14 +1,14 @@
 .dropdown-margin-true {
   margin-right: 20px;
-  border: 1px solid #E1E1E8;
+  border: 1px solid #e1e1e8;
   position: relative;
 }
 
 .dropdown-margin-false {
   margin-right: 20px;
-  border: 1px solid #E1E1E8;
-  background: #EBEBF0;
-  color: #AAAAAA;
+  border: 1px solid #e1e1e8;
+  background: #ebebf0;
+  color: #aaaaaa;
   position: relative;
   button {
     cursor: default;
@@ -26,7 +26,7 @@
 }
 
 .dropdown-wrapper-gender {
-  width: 82px;
+  width: 130px;
   height: 52px;
   display: flex;
   flex-direction: row;
@@ -36,7 +36,7 @@
 }
 
 .dropdown-wrapper-season {
-  width: 102px;
+  width: 130px;
   height: 52px;
   display: flex;
   flex-direction: row;
@@ -71,7 +71,7 @@ img.arrow {
   left: -1px;
   width: 185px;
   height: 312px;
-  border: 1px solid #E1E1E8;
+  border: 1px solid #e1e1e8;
   background-color: white;
   z-index: 3;
   overflow-y: scroll;
@@ -88,9 +88,9 @@ img.arrow {
   position: absolute;
   top: -1px;
   left: -1px;
-  width: 84px;
+  width: 130px;
   height: 158px;
-  border: 1px solid #E1E1E8;
+  border: 1px solid #e1e1e8;
   background-color: white;
   z-index: 3;
   overflow-y: scroll;
@@ -107,8 +107,8 @@ img.arrow {
   position: absolute;
   top: -1px;
   left: -1px;
-  width: 104px;
-  border: 1px solid #E1E1E8;
+  width: 130px;
+  border: 1px solid #e1e1e8;
   background-color: white;
   z-index: 3;
   overflow-y: scroll;
@@ -126,7 +126,7 @@ img.arrow {
   top: -1px;
   left: -1px;
   width: 185px;
-  border: 1px solid #E1E1E8;
+  border: 1px solid #e1e1e8;
   background-color: white;
   z-index: 3;
   overflow-y: scroll;

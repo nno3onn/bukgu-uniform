@@ -34,6 +34,7 @@ const Uniform = () => {
 
   const [logs, setLogs] = useState();
 
+  const [rejectText, setRejectText] = useState("");
   const [rejectModalOpen, setRejectModalOpen] = useState(false);
 
   const req = async () => {
@@ -42,6 +43,7 @@ const Uniform = () => {
         `${apiRoutes.UNIFORM_GET}?uniformId=${id}`
       );
 
+      console.log("uniformData:", data["data"]);
       if (data["data"]) {
         setUniformInfo(data["data"]);
 
@@ -65,8 +67,10 @@ const Uniform = () => {
         );
         setLoading(false);
         if (
-          data["data"].status === "구매승인요청" &&
-          (!data["data"].receiverCert || data["data"].receiverCert.length === 0)
+          (data["data"].status === "구매승인요청" &&
+            (!data["data"].receiverCert ||
+              data["data"].receiverCert.length === 0)) ||
+          data["data"].status === "출고대기중"
         ) {
           setCheckerGiverName(data["data"].receiverName);
           setCheckerGiverBirth(data["data"].receiverBirth);
@@ -165,8 +169,8 @@ const Uniform = () => {
       if (uniformInfo.status === "교복보유중") {
         updateData["totalSchool"] = [
           uniformInfo["filter-school"].indexOf("고등") === -1
-            ? "middleSchool"
-            : "highSchool",
+            ? "middleSchools"
+            : "highSchools",
           uniformInfo["filter-school"],
           "totalStock",
           -1,
@@ -292,7 +296,7 @@ const Uniform = () => {
   const handleUpdate = async () => {
     console.log("handleUpdate");
     console.log("images:", images);
-    console.log(images.size);
+    console.log("images.size:", images.size);
 
     // const imgs =
     //   images.size === 0
@@ -357,7 +361,7 @@ const Uniform = () => {
 
     const commonData = {
       totalSchool: [
-        school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
+        school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
         school,
         "totalStock",
         1,
@@ -367,8 +371,8 @@ const Uniform = () => {
     const commonData2 = {
       totalSchool: [
         uniformInfo["filter-school"].indexOf("고등") === -1
-          ? "middleSchool"
-          : "highSchool",
+          ? "middleSchools"
+          : "highSchools",
         uniformInfo["filter-school"],
         "totalStock",
         -1,
@@ -392,6 +396,7 @@ const Uniform = () => {
 
   const searchLogs = async () => {
     console.log(
+      "searchLogs:",
       `${apiRoutes.UNIFORM_SEARCH_RECORD}?nameKeyword=${checkerGiverName}&birthKeyword=${checkerGiverBirth}`
     );
     const logData = await networkHandler.getApi(
@@ -400,44 +405,51 @@ const Uniform = () => {
     setLogs(logData["data"]);
   };
 
-  const rejectShop = async (r) => {
+  const rejectShop = async (status, r) => {
     if (checkerGiverName === "" || checkerGiverBirth === "") {
       return alert("구매자 이름과 생년월일을 입력해주세요");
     } else {
       if (
         window.confirm(
-          "정말로 거절하시겠습니까?\n거절된 교복은 다시 유저들에게 공개됩니다"
+          status === "구매승인요청"
+            ? "정말로 거절하시겠습니까?\n거절된 교복은 다시 유저들에게 공개됩니다"
+            : "정말로 반려하시겠습니까?\n반려된 교복은 다시 유저들에게 공개됩니다"
         )
       ) {
-        const userLogData = {
-          uniformId: id,
-          showStatus: "거절",
-          why: r,
-        };
+        const infoData =
+          status === "구매승인요청"
+            ? {
+                // totalBeforeShop: -1,
+                // totalStock: 1,
+              }
+            : {
+                totalBeforeDelivery: -1,
+                totalStock: 1,
+              };
 
-        const commonData = {
-          // totalBeforeShop: updateLocalInfo("totalBeforeShop", -1),
-          // totalStock: updateLocalInfo("totalStock", 1),
-          totalBeforeShop: -1,
-          totalStock: 1,
+        const infoData2 = {
           totalSchool: [
-            school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
+            school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
             school,
             "totalStock",
             1,
-            // updateLocalInfo(
-            //   uniformInfo["filter-school"].indexOf("고등") === -1
-            //     ? `middleSchool.${uniformInfo["filter-school"]}.totalStock`
-            //     : `highSchool.${uniformInfo["filter-school"]}.totalStock`,
-            //   1
-            // ),
           ],
+        };
+        console.log("status", status, "infoData:", infoData);
+
+        const uniformData = {
+          status: "교복보유중",
+        };
+
+        const userLogData = {
+          uniformId: id,
+          showStatus: status === "구매승인요청" ? "거절" : "반려",
+          why: r,
         };
 
         const user = await networkHandler.getApi(
           `${apiRoutes.USER_GET}?targetUid=${uniformInfo["giverUid"]}`
         );
-
         const userData = {
           total: user.alarms.total + 1,
           uniformShop: user.alarms.uniformShop + 1,
@@ -465,11 +477,16 @@ const Uniform = () => {
               `${apiRoutes.USER_LOGS_UNIFORM_DONATE_UPDATE}`,
               userLogData
             ),
-            networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData),
             networkHandler.putApi(
               `${apiRoutes.USER_UPDATE}?targetUid=${uniformInfo["giverUid"]}`,
               userData
             ),
+            networkHandler.putApi(
+              `${apiRoutes.UNIFORM_UPDATE}?uniformId=${uniformInfo["uniformId"]}`,
+              uniformData
+            ),
+            networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, infoData),
+            networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, infoData2),
           ]);
         } catch (err) {
           console.log(err);
@@ -494,7 +511,7 @@ const Uniform = () => {
 
         const commonData = {
           totalSchool: [
-            school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
+            school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
             school,
             "totalStock",
             -1,
@@ -503,7 +520,7 @@ const Uniform = () => {
 
         const commonData2 = {
           totalSchool: [
-            school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
+            school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
             school,
             "totalShop",
             1,
@@ -564,7 +581,7 @@ const Uniform = () => {
 
       const commonData = {
         totalSchool: [
-          school.indexOf("고등") === -1 ? "middleSchool" : "highSchool",
+          school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
           school,
           "totalShop",
           -1,
@@ -603,10 +620,6 @@ const Uniform = () => {
     }
   };
 
-  const confirmReject = async () => {
-
-  }
-
   if (loading) return <LoadingPage />;
 
   const d1 = new Date(uniformInfo.dateStock);
@@ -619,6 +632,7 @@ const Uniform = () => {
         <RejectModal
           closeModal={() => setRejectModalOpen(false)}
           handleReject={rejectShop}
+          status={uniformInfo.status}
         />
       ) : null}
       <Head>
@@ -856,7 +870,7 @@ const Uniform = () => {
           </div>
           {uniformInfo.status !== "기부승인요청" &&
           uniformInfo.status !== "교복보유중" ? (
-            <>
+            <div className={styles["uniform-label-wrapper"]}>
               <div className={styles["uniform-label"]}>학생증</div>
               {!uniformInfo.receiverCert ||
               uniformInfo.receiverCert.length === 0 ? (
@@ -877,7 +891,7 @@ const Uniform = () => {
                   />
                 </div>
               )}
-            </>
+            </div>
           ) : null}
           {uniformInfo.status === "구매승인요청" ? (
             <div className={styles["uniform-logs-wrapper"]}>
@@ -913,7 +927,7 @@ const Uniform = () => {
                     <div className={styles.col4}>승인여부</div>
                   </div>
                   {logs.map((log, i) => {
-                    console.log(log);
+                    console.log("logs(", i, "):", log);
                     const d = log.uniformId.split("-")[0];
                     const ds = `20${d.substring(0, 2)}. ${d.substring(
                       2,
@@ -943,36 +957,35 @@ const Uniform = () => {
               </button>
             ) : null}
             {uniformInfo.status === "구매승인요청" ? (
-              <button
-                className={styles.reject}
-                onClick={() => setRejectModalOpen(true)}
-              >
-                거절
-              </button>
+              <>
+                <button
+                  className={styles.reject}
+                  onClick={() => setRejectModalOpen(true)}
+                >
+                  거절
+                </button>{" "}
+                <button className={styles.confirm} onClick={confirmShop}>
+                  구매승인
+                </button>
+              </>
             ) : null}
             {uniformInfo.status === "기부승인요청" ? (
               <button className={styles.confirm} onClick={handleStockConfirm}>
                 교복등록
               </button>
             ) : null}
-            {uniformInfo.status === "구매승인요청" ? (
-              <button className={styles.confirm} onClick={confirmShop}>
-                구매승인
-              </button>
-            ) : null}
             {uniformInfo.status === "출고대기중" ? (
-              <button className={styles.confirm} onClick={confirmDelivery}>
-                교복전달완료
-              </button>
-            ) : null}
-          </div>
-          <div className={styles['uniform-reject-wrapper']}>
-            {uniformInfo.status === '출고대기중' ? (
-              <div className={styles['uniform-btn-wrapper']}>
-                <button className={styles.reject} onClick={confirmReject}>
+              <>
+                <button
+                  className={styles.reject}
+                  onClick={() => setRejectModalOpen(true)}
+                >
                   반려하기
                 </button>
-              </div>
+                <button className={styles.confirm} onClick={confirmDelivery}>
+                  교복전달완료
+                </button>
+              </>
             ) : null}
           </div>
         </div>

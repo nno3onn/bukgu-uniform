@@ -17,8 +17,6 @@ const dateFormat = (date) => {
 
 const CSVSaver = (props) => {
   const { csvData, fileName } = props;
-  // const title = {'연번','신청일자','코드',}
-  console.log("csvData", csvData, fileName);
   const fileType = "";
   const fileExtension = ".xlsx";
 

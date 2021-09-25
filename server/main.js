@@ -51,9 +51,9 @@ const main = async () => {
 
   // createJSONFiles();
   // initInfo();
+  // initUniform();
   // initUser();
   // inituniformTransferRecord();
-  // initUniform();
 };
 
 main();

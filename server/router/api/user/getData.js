@@ -10,7 +10,7 @@ router.get("/", isMineOrAdmin, async (req, res) => {
     const { targetUid } = req.query;
 
     const user = await UserModel.findOne({
-      fcm: targetUid,
+      _id: targetUid,
     });
 
     res.status(200).json(user);

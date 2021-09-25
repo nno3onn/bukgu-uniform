@@ -65,7 +65,7 @@ const Table = ({ list }) => {
                       : "직접 방문"}
                   </div>
                   <div className={styles["table-beforeShop-section9"]}>
-                    {ds}
+                    {data.dateShop ? ds : "미지정"}
                   </div>
                 </a>
               </Link>
