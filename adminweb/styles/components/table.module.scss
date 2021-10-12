@@ -14,7 +14,29 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-top: 1px solid #EBEBF0;
+  border-top: 1px solid #ebebf0;
+}
+.table-section-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid #ebebf0;
+}
+
+.loading-wrapper {
+  width: 100%;
+  height: 114px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #ebebf0;
+
+  .loading {
+    margin: 32px 0px;
+    width: 114px;
+  }
 }
 
 /* table before stock */
@@ -549,7 +571,6 @@ $table-beforeShop-width-9: 118px;
 
 /**********************/
 
-
 /**********************/
 
 /* table stock & before shop */
@@ -860,9 +881,6 @@ $table-shopped-width-8: 126px;
   line-height: 24px;
   color: #444;
   font-family: Poppins, sans-serif;
-  
 }
 
 /**********************/
-
-

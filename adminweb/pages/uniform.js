@@ -27,6 +27,7 @@ const Uniform = () => {
   const [checkerGiverBirth, setCheckerGiverBirth] = useState("");
 
   const [images, setImages] = useState(List([]));
+  const [removeImages, setRemoveImages] = useState([]);
   const [school, setSchool] = useState("");
   const [gender, setGender] = useState("");
   const [season, setSeason] = useState("");
@@ -50,7 +51,7 @@ const Uniform = () => {
         setImages(
           List(
             data["data"].images.map((img) => ({
-              url: img,
+              url: networkHandler.getImageFromServer(img),
               file: null,
             }))
           )
@@ -104,18 +105,23 @@ const Uniform = () => {
   };
 
   const removeImg = (index) => () => {
-    console.log("index:", index);
-    console.log("removeImg-images", images);
-    console.log("removeImg-remove index", images.remove(index));
     let yes;
     yes = window.confirm(
       "사진을 삭제하시겠습니까?\n하단에 변경사항저장까지 누르셔야 최종적용됩니다"
     );
 
     if (yes) {
-      console.log("image.size:", images.size);
-      setImages(images.size === 1 ? List([]) : images.remove(index));
-      // console.log("remove image:", images);
+      const url = images["_tail"].array[index].url.split("/");
+
+      if (url[2] !== "firebasestorage.googleapis.com") {
+        const imageName = images["_tail"].array[index].url.split("/")[4];
+        setRemoveImages(removeImages.concat(imageName));
+      }
+      setImages(
+        index == 0
+          ? images.shift().filter((e, i) => e !== undefined)
+          : images.remove(index)
+      );
     }
   };
 
@@ -141,7 +147,7 @@ const Uniform = () => {
   };
   const removeCloth = (index) => () => {
     const yes = window.confirm(
-      "옷을 삭제하시겠습니까?\n삭제하시고 최하단에 저장하기 까지 누르셔야 최종적용됩니다"
+      "옷을 삭제하시겠습니까?\n삭제하시고 최하단에 저장하기 까지 누르셔야 최종적용됩니다."
     );
     if (yes) {
       setClothes(clothes.remove(index));
@@ -151,7 +157,7 @@ const Uniform = () => {
   const handleUniformDelete = async () => {
     if (
       window.confirm(
-        "정말로 교복정보를 삭제하시겠습니까?\n삭제후에는 복구하실 수 없습니다"
+        "정말로 교복정보를 삭제하시겠습니까?\n삭제후에는 복구하실 수 없습니다."
       )
     ) {
       let updateKey;
@@ -177,13 +183,24 @@ const Uniform = () => {
         ];
       }
 
-      await Promise.all([
-        networkHandler.getApi(`${apiRoutes.UNIFORM_DELETE}?uniformId=${id}`),
-        networkHandler.postApi(
-          `${apiRoutes.INFO_UPDATE}?uniformId=${id}`,
-          updateData
-        ),
-      ]);
+      try {
+        await Promise.all([
+          networkHandler.getApi(`${apiRoutes.UNIFORM_DELETE}?uniformId=${id}`),
+          networkHandler.postApi(
+            `${apiRoutes.INFO_UPDATE}?uniformId=${id}`,
+            updateData
+          ),
+        ]);
+
+        images.map(async ({ file, url }) => {
+          const fileName = url.split("/")[4];
+          networkHandler.deleteImageApi(fileName);
+        });
+
+        alert("해당 교복을 삭제하였습니다.");
+      } catch (error) {
+        alert(`오류가 발생하여 교복을 삭제하지 못했습니다.\n${error}`);
+      }
       router.back();
     }
   };
@@ -191,7 +208,7 @@ const Uniform = () => {
   const handleStockConfirm = async () => {
     if (
       window.confirm(
-        "정말로 등록하시겠습니까?\n등록하시면 바로 앱에 유저들에게 교복이 노출됩니다"
+        "정말로 등록하시겠습니까?\n등록하시면 바로 앱에 유저들에게 교복이 노출됩니다."
       )
     ) {
       const imgs = await Promise.all(
@@ -294,15 +311,7 @@ const Uniform = () => {
   };
 
   const handleUpdate = async () => {
-    console.log("handleUpdate");
-    console.log("images:", images);
-    console.log("images.size:", images.size);
-
-    // const imgs =
-    //   images.size === 0
-    //     ? []
-    //     : await Promise.all(images.toJS().map((a) => console.log(a)));
-
+    console.log("-----removeImages:", removeImages);
     const imgs = await Promise.all(
       images.map(async ({ file, url }) => {
         console.log("file:", file, "url:", url);
@@ -388,10 +397,18 @@ const Uniform = () => {
         networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData),
         networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData2)
       );
+
+      console.log(removeImages.length, Array.isArray(removeImages));
+      if (removeImages.length !== 0 && Array.isArray(removeImages)) {
+        removeImages.map((image) => {
+          networkHandler.deleteImageApi(image);
+        });
+      }
     }
 
     await Promise.all(futures);
     alert("수정사항이 반영되었습니다");
+    setRemoveImages([]);
   };
 
   const searchLogs = async () => {
@@ -658,6 +675,7 @@ const Uniform = () => {
               삭제
             </button>
           </div>
+
           <div className={styles["uniform-label"]}>상세정보</div>
           <div className={styles["uniform-giver-table-wrapper"]}>
             <div className={styles["uniform-giver-table"]}>
@@ -895,7 +913,7 @@ const Uniform = () => {
           ) : null}
           {uniformInfo.status === "구매승인요청" ? (
             <div className={styles["uniform-logs-wrapper"]}>
-              <div className={styles["uniform-label2"]}>기록조회</div>
+              <div className={styles["uniform-label"]}>기록조회</div>
               <div className={styles["uniform-inner-label"]}>구매자 이름</div>
               <input
                 className={styles["uniform-inner-input"]}

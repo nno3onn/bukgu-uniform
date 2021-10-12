@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import styles from "styles/components/table.module.scss";
 import networkHandler from "configs/networkHandler";
+import Skeleton from "react-loading-skeleton";
 
 const Table = ({ list }) => {
   console.log(list);
@@ -21,55 +22,65 @@ const Table = ({ list }) => {
           <div className={styles["table-beforeShop-header9"]}>신청날짜</div>
         </div>
         <div>
-          {list.map((data, i) => (
-            <Link href={`/uniform?id=${data.code}`} key={String(i)}>
-              <a className={styles["table-section-row"]}>
-                <div className={styles["table-beforeShop-section1"]}>
-                  {data.code}
+          {Array.isArray(list) && list.length === 0 ? (
+            <div className={styles["table-section-column"]}>
+              {[...Array(20)].map(() => (
+                <div className={styles["loading-wrapper"]}>
+                  <Skeleton height={50} width={1100} />
                 </div>
-                <div className={styles["table-beforeShop-section2"]}>
-                  <div
-                    style={{
-                      backgroundImage: `url(${networkHandler.getImageFromServer(
-                        data.images[0]
-                      )})`,
-                    }}
-                  />
-                </div>
-                <div className={styles["table-beforeShop-section3"]}>
-                  {data["filter-school"]}
-                </div>
-                <div className={styles["table-beforeShop-section4"]}>
-                  {data["filter-clothType"].join(" / ")}
-                </div>
-                <div className={styles["table-beforeShop-section5"]}>
-                  {data["receiverName"]}
-                </div>
-                <div className={styles["table-beforeShop-section6"]}>{`${data[
-                  "receiverPhone"
-                ].substring(0, 3)}-${data["receiverPhone"].substring(
-                  3,
-                  7
-                )}-${data["receiverPhone"].substring(7, 11)}`}</div>
-                <div className={styles["table-beforeShop-section7"]}>
-                  {data["receiverAddress"] || "-"}
-                </div>
-                <div className={styles["table-beforeShop-section8"]}>
-                  {data["receiverDeliveryType"] === "배송 요청"
-                    ? "배송 요청"
-                    : "직접 방문"}
-                </div>
-                <div className={styles["table-beforeShop-section9"]}>
-                  {data.code
-                    ? `20${data.code.substring(0, 2)}.${data.code.substring(
-                        2,
-                        4
-                      )}.${data.code.substring(4, 6)}`
-                    : "미지정"}
-                </div>
-              </a>
-            </Link>
-          ))}
+              ))}
+            </div>
+          ) : (
+            list.map((data, i) => (
+              <Link href={`/uniform?id=${data.code}`} key={String(i)}>
+                <a className={styles["table-section-row"]}>
+                  <div className={styles["table-beforeShop-section1"]}>
+                    {data.code}
+                  </div>
+                  <div className={styles["table-beforeShop-section2"]}>
+                    <div
+                      style={{
+                        backgroundImage: `url(${networkHandler.getImageFromServer(
+                          data.images[0]
+                        )})`,
+                      }}
+                    />
+                  </div>
+                  <div className={styles["table-beforeShop-section3"]}>
+                    {data["filter-school"]}
+                  </div>
+                  <div className={styles["table-beforeShop-section4"]}>
+                    {data["filter-clothType"].join(" / ")}
+                  </div>
+                  <div className={styles["table-beforeShop-section5"]}>
+                    {data["receiverName"]}
+                  </div>
+                  <div className={styles["table-beforeShop-section6"]}>{`${data[
+                    "receiverPhone"
+                  ].substring(0, 3)}-${data["receiverPhone"].substring(
+                    3,
+                    7
+                  )}-${data["receiverPhone"].substring(7, 11)}`}</div>
+                  <div className={styles["table-beforeShop-section7"]}>
+                    {data["receiverAddress"] || "-"}
+                  </div>
+                  <div className={styles["table-beforeShop-section8"]}>
+                    {data["receiverDeliveryType"] === "배송 요청"
+                      ? "배송 요청"
+                      : "직접 방문"}
+                  </div>
+                  <div className={styles["table-beforeShop-section9"]}>
+                    {data.code
+                      ? `20${data.code.substring(0, 2)}.${data.code.substring(
+                          2,
+                          4
+                        )}.${data.code.substring(4, 6)}`
+                      : "미지정"}
+                  </div>
+                </a>
+              </Link>
+            ))
+          )}
         </div>
       </div>
     </div>

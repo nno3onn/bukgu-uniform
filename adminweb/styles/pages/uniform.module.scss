@@ -48,11 +48,16 @@
   margin-bottom: 50px;
   padding-bottom: 50px;
 
-  .uniform-label {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 24px;
-  }
+  // .uniform-label {
+  //   font-size: 14px;
+  //   color: #888;
+  //   margin-bottom: 24px;
+  // }
+}
+.uniform-label {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 24px;
 }
 
 .uniform-giver-table-wrapper {
@@ -248,13 +253,13 @@ label.add {
   }
 }
 
-.uniform-label2 {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #ebebf0;
-}
+// .uniform-label2 {
+//   font-size: 14px;
+//   color: #888;
+//   margin-bottom: 24px;
+//   padding-bottom: 24px;
+// border-bottom: 1px solid #ebebf0;
+// }
 
 .uniform-inner-label {
   font-size: 12px;

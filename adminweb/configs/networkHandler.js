@@ -71,7 +71,28 @@ const postImageApi = async ({ files }) => {
 };
 
 const getImageFromServer = (src) => {
+  if (src.slice(0, 4) === "http") return src;
   return `${apiRoutes.SERVER_PATH}/${src}`;
+};
+
+const deleteImageApi = async (file) => {
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const res = await fetch(
+      `${apiRoutes.SERVER_PATH}/api/remove/${file}`,
+      options
+    );
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export default {
@@ -79,5 +100,6 @@ export default {
   postApi,
   putApi,
   getImageFromServer,
+  deleteImageApi,
   postImageApi,
 };
