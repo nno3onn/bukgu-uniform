@@ -33,7 +33,6 @@ const upload = multer({
 router.post("/", upload.single("imageFile"), async (req, res) => {
   try {
     const file = req.file;
-    console.log(req.file);
 
     if (!file) {
       res.json({

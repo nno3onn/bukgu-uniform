@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", isUserOrAdmin, async (req, res) => {
   try {
-    console.log(req.query);
+    // console.log(req.query);
     const {
       gender = null,
       clothType = null,
@@ -54,7 +54,7 @@ router.get("/", isUserOrAdmin, async (req, res) => {
     if (andQuery.length > 0) conditions["$and"] = andQuery;
 
     const lists = await UniformModel.find(conditions);
-    console.log(lists);
+    // console.log(lists);
 
     res.status(200).json({
       success: true,

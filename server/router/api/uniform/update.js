@@ -6,7 +6,6 @@ const UniformModel = require("models/uniform");
 const router = express.Router();
 
 router.put("/", isUserOrAdmin, async (req, res) => {
-  console.log("uniform update req.body:", req.body);
   try {
     const { uniformId } = req.query;
     const {
@@ -65,9 +64,9 @@ router.put("/", isUserOrAdmin, async (req, res) => {
     if (dateStock) updated["dateStock"] = dateStock;
     if (dateDelivery) updated["dateDelivery"] = dateDelivery;
 
-    console.log("title:", title);
-    console.log("uniformId:", uniformId);
-    console.log("updated:", updated);
+    // console.log("title:", title);
+    // console.log("uniformId:", uniformId);
+    // console.log("updated:", updated);
 
     const uniform = await UniformModel.findOne({ uniformId });
     if (uniform === null) new Error("non exist uniform");

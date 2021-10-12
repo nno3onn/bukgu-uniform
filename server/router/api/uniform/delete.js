@@ -14,15 +14,14 @@ router.get("/", isAdmin, async (req, res) => {
     const uniform = await UniformModel.findOne({ uniformId });
     if (uniform === null) new Error("no exist uniform");
     else {
-      if (uniform.images.length) {
-        uniform.images.forEach((filename) => {
-          const filePath = path.join(__dirname, "../../../", filename);
-          fs.unlinkSync(filePath);
-        });
-      }
+      await UniformModel.deleteOne({ uniformId });
+      // if (uniform.images.length) {
+      //   uniform.images.forEach((filename) => {
+      //     const filePath = path.join(__dirname, "../../../", filename);
+      //     fs.unlinkSync(filePath);
+      //   });
+      // }
     }
-
-    await UniformModel.deleteOne({ uniformId });
 
     res.status(200).json({ success: true });
   } catch (err) {

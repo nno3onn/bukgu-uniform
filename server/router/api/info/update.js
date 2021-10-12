@@ -6,7 +6,6 @@ const isUserOrAdmin = require("middlewares/auth/isUserOrAdmin");
 const router = express.Router();
 
 router.post("/", isUserOrAdmin, async (req, res) => {
-  console.log("info update req.body", req.body);
   try {
     const {
       totalStock,
