@@ -22,7 +22,7 @@ const AuthHoC = ({ children }) => {
           if (data.data.userType === "admin") {
             setAuthentication(true);
 
-            const info = await networkHandler.getApi(apiRoutes.INFO_GET);
+            const info = await networkHandler.getApi(apiRoutes.INFO_PATH);
             window.localStorage.setItem("info", JSON.stringify(info));
           }
         })

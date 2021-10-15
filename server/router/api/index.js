@@ -13,7 +13,7 @@ router.use("/info", infoRouter);
 router.use("/user", userRouter);
 router.use("/admin", adminRouter);
 router.use("/uniform", uniformRouter);
-router.use("/uploads", uploadRouter);
-router.use("/remove", removeRouter);
+router.use("/", uploadRouter);
+router.use("/", removeRouter);
 
 module.exports = router;

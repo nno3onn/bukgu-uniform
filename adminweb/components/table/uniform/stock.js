@@ -19,12 +19,28 @@ const Table = ({ list }) => {
           <div className={styles["table-stock-header6"]}>입고일</div>
         </div>
         <div>
-          {" "}
-          {Array.isArray(list) && list.length === 0 ? (
+          {!Array.isArray(list) ? (
             <div className={styles["table-section-column"]}>
-              {[...Array(20)].map(() => (
-                <div className={styles["loading-wrapper"]}>
-                  <Skeleton height={50} width={1100} />
+              {[...Array(7)].map(() => (
+                <div className={styles["table-section-row"]}>
+                  <div className={styles["table-stock-section1"]}>
+                    <Skeleton height={16} width={120} />
+                  </div>
+                  <div className={styles["table-stock-section2"]}>
+                    <Skeleton height={82} width={82} />
+                  </div>
+                  <div className={styles["table-stock-section3"]}>
+                    <Skeleton height={16} width={80} />
+                  </div>
+                  <div className={styles["table-stock-section4"]}>
+                    <Skeleton height={16} width={300} />
+                  </div>
+                  <div className={styles["table-stock-section5"]}>
+                    <Skeleton height={16} width={50} />
+                  </div>
+                  <div className={styles["table-stock-section6"]}>
+                    <Skeleton height={16} width={80} />
+                  </div>
                 </div>
               ))}
             </div>

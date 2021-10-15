@@ -24,12 +24,37 @@ const Table = ({ list }) => {
           <div className={styles["table-beforeStock-header9"]}>신청날짜</div>
         </div>
         <div>
-          {" "}
-          {Array.isArray(list) && list.length === 0 ? (
+          {!Array.isArray(list) ? (
             <div className={styles["table-section-column"]}>
-              {[...Array(20)].map(() => (
-                <div className={styles["loading-wrapper"]}>
-                  <Skeleton height={50} width={1100} />
+              {[...Array(7)].map(() => (
+                <div className={styles["table-section-row"]}>
+                  <div className={styles["table-beforeStock-section1"]}>
+                    <Skeleton height={16} width={120} />
+                  </div>
+                  <div className={styles["table-beforeStock-section2"]}>
+                    <Skeleton height={82} width={82} />
+                  </div>
+                  <div className={styles["table-beforeStock-section3"]}>
+                    <Skeleton height={16} width={80} />
+                  </div>
+                  <div className={styles["table-beforeStock-section4"]}>
+                    <Skeleton height={16} width={100} />
+                  </div>
+                  <div className={styles["table-beforeStock-section5"]}>
+                    <Skeleton height={16} width={50} />
+                  </div>
+                  <div className={styles["table-beforeStock-section6"]}>
+                    <Skeleton height={16} width={100} />
+                  </div>
+                  <div className={styles["table-beforeStock-section8"]}>
+                    <Skeleton height={16} width={80} />
+                  </div>
+                  <div className={styles["table-beforeStock-section7"]}>
+                    <Skeleton height={16} width={150} />
+                  </div>
+                  <div className={styles["table-beforeStock-section9"]}>
+                    <Skeleton height={16} width={80} />
+                  </div>
                 </div>
               ))}
             </div>

@@ -51,6 +51,25 @@ const putApi = async (url, body) => {
   return res.json();
 };
 
+const deleteApi = async (url, data) => {
+  const token = window.localStorage.getItem("x-access-token");
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  };
+
+  try {
+    const res = await fetch(`${url}/${data}`, options);
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const postImageApi = async ({ files }) => {
   const token = window.localStorage.getItem("x-access-token");
   const options = {
@@ -75,31 +94,11 @@ const getImageFromServer = (src) => {
   return `${apiRoutes.SERVER_PATH}/${src}`;
 };
 
-const deleteImageApi = async (file) => {
-  const options = {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  try {
-    const res = await fetch(
-      `${apiRoutes.SERVER_PATH}/api/remove/${file}`,
-      options
-    );
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 export default {
   getApi,
   postApi,
   putApi,
+  deleteApi,
   getImageFromServer,
-  deleteImageApi,
   postImageApi,
 };

@@ -22,11 +22,37 @@ const Table = ({ list }) => {
           <div className={styles["table-beforeShop-header9"]}>신청날짜</div>
         </div>
         <div>
-          {Array.isArray(list) && list.length === 0 ? (
+          {!Array.isArray(list) ? (
             <div className={styles["table-section-column"]}>
-              {[...Array(20)].map(() => (
-                <div className={styles["loading-wrapper"]}>
-                  <Skeleton height={50} width={1100} />
+              {[...Array(7)].map(() => (
+                <div className={styles["table-section-row"]}>
+                  <div className={styles["table-beforeShop-section1"]}>
+                    <Skeleton height={16} width={120} />
+                  </div>
+                  <div className={styles["table-beforeShop-section2"]}>
+                    <Skeleton height={82} width={82} />
+                  </div>
+                  <div className={styles["table-beforeShop-section3"]}>
+                    <Skeleton height={16} width={80} />
+                  </div>
+                  <div className={styles["table-beforeShop-section4"]}>
+                    <Skeleton height={16} width={120} />
+                  </div>
+                  <div className={styles["table-beforeShop-section5"]}>
+                    <Skeleton height={16} width={50} />
+                  </div>
+                  <div className={styles["table-beforeShop-section6"]}>
+                    <Skeleton height={16} width={100} />
+                  </div>
+                  <div className={styles["table-beforeShop-section7"]}>
+                    <Skeleton height={16} width={180} />
+                  </div>
+                  <div className={styles["table-beforeShop-section8"]}>
+                    <Skeleton height={16} width={80} />
+                  </div>
+                  <div className={styles["table-beforeShop-section9"]}>
+                    <Skeleton height={16} width={80} />
+                  </div>
                 </div>
               ))}
             </div>

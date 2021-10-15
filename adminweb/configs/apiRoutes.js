@@ -1,50 +1,36 @@
 const SERVER_PATH = "http://172.30.1.34:3001";
-const UPLOAD_PATH = `${SERVER_PATH}/api/uploads`;
+const API_PATH = `${SERVER_PATH}/api`;
 
-const ADMIN_PATH = `${SERVER_PATH}/api/admin`;
+const ADMIN_PATH = `${API_PATH}/admin`;
 const ADMIN_SIGN_IN = `${ADMIN_PATH}/signin`;
 const ADMIN_VERIFY = `${ADMIN_PATH}/verifyToken`;
 
-const INFO_PATH = `${SERVER_PATH}/api/info`;
-const INFO_GET = `${INFO_PATH}/getData`;
-const INFO_UPDATE = `${INFO_PATH}/update`;
+const INFO_PATH = `${API_PATH}/info`;
 
-const USER_PATH = `${SERVER_PATH}/api/user`;
-const USER_GET = `${USER_PATH}/getData`;
-const USER_UPDATE = `${USER_PATH}/update`;
+const USER_PATH = `${API_PATH}/user`;
+const USER_LOGS_UNIFORM_DONATE = `${USER_PATH}/logs/uniform/donate`;
 
-const USER_LOGS_UNIFORM_DONATE = `${SERVER_PATH}/api/user/logs/uniform/donate`;
-const USER_LOGS_UNIFORM_DONATE_UPDATE = `${USER_LOGS_UNIFORM_DONATE}/update`;
-
-const UNIFORM_PATH = `${SERVER_PATH}/api/uniform`;
+const UNIFORM_PATH = `${API_PATH}/uniform`;
 const UNIFORM_LIST = `${UNIFORM_PATH}/list`;
-const UNIFORM_GET = `${UNIFORM_PATH}/getData`;
-const UNIFORM_DELETE = `${UNIFORM_PATH}/delete`;
-const UNIFORM_UPDATE = `${UNIFORM_PATH}/update`;
 const UNIFORM_CONFIRM_DONATE = `${UNIFORM_PATH}/confirm/donate`;
 const UNIFORM_CONFIRM_PURCHASE = `${UNIFORM_PATH}/confirm/purchase`;
 const UNIFORM_CONFIRM_DELIVERY = `${UNIFORM_PATH}/confirm/delivery`;
-const UNIFORM_SEARCH_RECORD = `${UNIFORM_PATH}/searchRecord`;
 const UNIFORM_REJECT_PURCHASE = `${UNIFORM_PATH}/reject/purchase`;
+const UNIFORM_SEARCH_RECORD = `${UNIFORM_PATH}/searchRecord`;
 
 export default {
   SERVER_PATH,
-  UPLOAD_PATH,
+  API_PATH,
+  INFO_PATH,
   USER_PATH,
+  UNIFORM_PATH,
   ADMIN_PATH,
-  USER_GET,
   ADMIN_SIGN_IN,
   ADMIN_VERIFY,
   UNIFORM_LIST,
-  INFO_GET,
-  INFO_UPDATE,
-  UNIFORM_GET,
-  UNIFORM_DELETE,
-  UNIFORM_UPDATE,
   UNIFORM_CONFIRM_DONATE,
   UNIFORM_CONFIRM_PURCHASE,
-  USER_LOGS_UNIFORM_DONATE_UPDATE,
-  USER_UPDATE,
+  USER_LOGS_UNIFORM_DONATE,
   UNIFORM_SEARCH_RECORD,
   UNIFORM_CONFIRM_DELIVERY,
   UNIFORM_REJECT_PURCHASE,

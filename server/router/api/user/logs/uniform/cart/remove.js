@@ -6,12 +6,12 @@ const isMine = require("middlewares/auth/isMine");
 
 const router = express.Router();
 
-router.get("/", isMine, async (req, res) => {
+router.delete("/:logId", isMine, async (req, res) => {
   try {
     const token = req.headers["x-access-token"];
     const { userId } = jwt.decode(token);
 
-    const { logId } = req.query;
+    const logId = req.params.logId;
 
     await UserLogModel.deleteOne({ _id: logId, ownerId: userId });
 

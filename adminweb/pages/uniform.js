@@ -35,13 +35,12 @@ const Uniform = () => {
 
   const [logs, setLogs] = useState();
 
-  const [rejectText, setRejectText] = useState("");
   const [rejectModalOpen, setRejectModalOpen] = useState(false);
 
   const req = async () => {
     try {
       const data = await networkHandler.getApi(
-        `${apiRoutes.UNIFORM_GET}?uniformId=${id}`
+        `${apiRoutes.UNIFORM_PATH}?uniformId=${id}`
       );
 
       console.log("uniformData:", data["data"]);
@@ -114,8 +113,9 @@ const Uniform = () => {
       const url = images["_tail"].array[index].url.split("/");
 
       if (url[2] !== "firebasestorage.googleapis.com") {
-        const imageName = images["_tail"].array[index].url.split("/")[4];
-        setRemoveImages(removeImages.concat(imageName));
+        const urls = images["_tail"].array[index].url.split("/");
+        const fileName = urls[urls.length - 1];
+        setRemoveImages(removeImages.concat(fileName));
       }
       setImages(
         index == 0
@@ -185,16 +185,17 @@ const Uniform = () => {
 
       try {
         await Promise.all([
-          networkHandler.getApi(`${apiRoutes.UNIFORM_DELETE}?uniformId=${id}`),
+          networkHandler.deleteApi(apiRoutes.UNIFORM_PATH, id),
           networkHandler.postApi(
-            `${apiRoutes.INFO_UPDATE}?uniformId=${id}`,
+            `${apiRoutes.INFO_PATH}?uniformId=${id}`,
             updateData
           ),
         ]);
 
-        images.map(async ({ file, url }) => {
-          const fileName = url.split("/")[4];
-          networkHandler.deleteImageApi(fileName);
+        images.map(async ({ url }) => {
+          const urls = url.split("/");
+          const fileName = urls[urls.length - 1];
+          networkHandler.deleteApi(apiRoutes.API_PATH, fileName);
         });
 
         alert("해당 교복을 삭제하였습니다.");
@@ -223,7 +224,7 @@ const Uniform = () => {
             const formData = new FormData();
             formData.append("imageFile", file, filename);
 
-            fetch(apiRoutes.UPLOAD_PATH, {
+            fetch(apiRoutes.API_PATH, {
               method: "POST",
               body: formData,
             })
@@ -278,7 +279,7 @@ const Uniform = () => {
       };
 
       const user = await networkHandler.getApi(
-        `${apiRoutes.USER_GET}?targetUid=${uniformInfo["giverUid"]}`
+        `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`
       );
       console.log("user:", user);
 
@@ -289,7 +290,7 @@ const Uniform = () => {
 
       await Promise.all([
         networkHandler.putApi(
-          `${apiRoutes.UNIFORM_UPDATE}?uniformId=${id}`,
+          `${apiRoutes.UNIFORM_PATH}?uniformId=${id}`,
           uniformData
         ),
         networkHandler.putApi(
@@ -297,12 +298,12 @@ const Uniform = () => {
           {}
         ),
         networkHandler.putApi(
-          `${apiRoutes.USER_LOGS_UNIFORM_DONATE_UPDATE}`,
+          `${apiRoutes.USER_LOGS_UNIFORM_DONATE}`,
           userLogData
         ),
-        networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData),
+        networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData),
         networkHandler.putApi(
-          `${apiRoutes.USER_UPDATE}?targetUid=${uniformInfo["giverUid"]}`,
+          `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`,
           userData
         ),
       ]);
@@ -311,10 +312,8 @@ const Uniform = () => {
   };
 
   const handleUpdate = async () => {
-    console.log("-----removeImages:", removeImages);
     const imgs = await Promise.all(
       images.map(async ({ file, url }) => {
-        console.log("file:", file, "url:", url);
         if (!file) {
           return url;
         } else {
@@ -325,7 +324,7 @@ const Uniform = () => {
           const formData = new FormData();
           formData.append("imageFile", file, filename);
 
-          fetch(apiRoutes.UPLOAD_PATH, {
+          fetch(apiRoutes.API_PATH, {
             method: "POST",
             body: formData,
           })
@@ -363,7 +362,7 @@ const Uniform = () => {
 
     const futures = [
       networkHandler.putApi(
-        `${apiRoutes.UNIFORM_UPDATE}?uniformId=${id}`,
+        `${apiRoutes.UNIFORM_PATH}?uniformId=${id}`,
         uniformData
       ),
     ];
@@ -391,17 +390,18 @@ const Uniform = () => {
     if (uniformInfo.status === "교복보유중") {
       futures.push(
         networkHandler.putApi(
-          `${apiRoutes.UNIFORM_UPDATE}?uniformId=${id}`,
+          `${apiRoutes.UNIFORM_PATH}?uniformId=${id}`,
           uniformData
         ),
-        networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData),
-        networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData2)
+        networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData),
+        networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData2)
       );
 
       console.log(removeImages.length, Array.isArray(removeImages));
       if (removeImages.length !== 0 && Array.isArray(removeImages)) {
-        removeImages.map((image) => {
-          networkHandler.deleteImageApi(image);
+        removeImages.map((fileName) => {
+          networkHandler.deleteApi(apiRoutes.API_PATH, fileName);
+          // networkHandler.deleteImageApi(image);
         });
       }
     }
@@ -465,7 +465,7 @@ const Uniform = () => {
         };
 
         const user = await networkHandler.getApi(
-          `${apiRoutes.USER_GET}?targetUid=${uniformInfo["giverUid"]}`
+          `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`
         );
         const userData = {
           total: user.alarms.total + 1,
@@ -491,19 +491,19 @@ const Uniform = () => {
               uniformTransferRecordData
             ),
             networkHandler.putApi(
-              `${apiRoutes.USER_LOGS_UNIFORM_DONATE_UPDATE}`,
+              `${apiRoutes.USER_LOGS_UNIFORM_DONATE}`,
               userLogData
             ),
             networkHandler.putApi(
-              `${apiRoutes.USER_UPDATE}?targetUid=${uniformInfo["giverUid"]}`,
+              `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`,
               userData
             ),
             networkHandler.putApi(
-              `${apiRoutes.UNIFORM_UPDATE}?uniformId=${uniformInfo["uniformId"]}`,
+              `${apiRoutes.UNIFORM_PATH}?uniformId=${uniformInfo["uniformId"]}`,
               uniformData
             ),
-            networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, infoData),
-            networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, infoData2),
+            networkHandler.postApi(`${apiRoutes.INFO_PATH}`, infoData),
+            networkHandler.postApi(`${apiRoutes.INFO_PATH}`, infoData2),
           ]);
         } catch (err) {
           console.log(err);
@@ -545,7 +545,7 @@ const Uniform = () => {
         };
 
         const user = await networkHandler.getApi(
-          `${apiRoutes.USER_GET}?targetUid=${uniformInfo["giverUid"]}`
+          `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`
         );
 
         const userData = {
@@ -572,13 +572,13 @@ const Uniform = () => {
               uniformTransferRecordData
             ),
             networkHandler.putApi(
-              `${apiRoutes.USER_LOGS_UNIFORM_DONATE_UPDATE}`,
+              `${apiRoutes.USER_LOGS_UNIFORM_DONATE}`,
               userLogData
             ),
-            networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData),
-            networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData2),
+            networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData),
+            networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData2),
             networkHandler.putApi(
-              `${apiRoutes.USER_UPDATE}?targetUid=${uniformInfo["giverUid"]}`,
+              `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`,
               userData
             ),
           ]);
@@ -606,7 +606,7 @@ const Uniform = () => {
       };
 
       const user = await networkHandler.getApi(
-        `${apiRoutes.USER_GET}?targetUid=${uniformInfo["giverUid"]}`
+        `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`
       );
 
       const userData = {
@@ -621,12 +621,12 @@ const Uniform = () => {
             {}
           ),
           networkHandler.putApi(
-            `${apiRoutes.USER_LOGS_UNIFORM_DONATE_UPDATE}`,
+            `${apiRoutes.USER_LOGS_UNIFORM_DONATE}`,
             userLogData
           ),
-          networkHandler.postApi(`${apiRoutes.INFO_UPDATE}`, commonData),
+          networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData),
           networkHandler.putApi(
-            `${apiRoutes.USER_UPDATE}?targetUid=${uniformInfo["giverUid"]}`,
+            `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`,
             userData
           ),
         ]);

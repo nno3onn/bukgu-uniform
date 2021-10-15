@@ -1,1 +1,628 @@
-{"middleSchool":{"mapValue":{"fields":{"학남중학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"6","valueType":"integerValue"},"totalStock":{"integerValue":"1","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"대구북중학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"4","valueType":"integerValue"},"totalDonate":{"integerValue":"5","valueType":"integerValue"}}},"valueType":"mapValue"},"사수중학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"9","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"서변중학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"3","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"4","valueType":"integerValue"}}},"valueType":"mapValue"},"대구체육중학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"성화중학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"강북중학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"12","valueType":"integerValue"}}},"valueType":"mapValue"},"관천중학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"4","valueType":"integerValue"},"totalDonate":{"integerValue":"6","valueType":"integerValue"}}},"valueType":"mapValue"},"교동중학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"성광중학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"25","valueType":"integerValue"},"totalStock":{"integerValue":"5","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"운암중학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"8","valueType":"integerValue"},"totalDonate":{"integerValue":"15","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"팔달중학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"경명여자중학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"19","valueType":"integerValue"},"totalStock":{"integerValue":"1","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"동평중학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"2","valueType":"integerValue"},"totalDonate":{"integerValue":"5","valueType":"integerValue"}}},"valueType":"mapValue"},"칠곡중학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"3","valueType":"integerValue"},"totalStock":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"구암중학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"1","valueType":"integerValue"},"totalDonate":{"integerValue":"5","valueType":"integerValue"}}},"valueType":"mapValue"},"침산중학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"5","valueType":"integerValue"},"totalDonate":{"integerValue":"12","valueType":"integerValue"}}},"valueType":"mapValue"},"산격중학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"2","valueType":"integerValue"},"totalDonate":{"integerValue":"3","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"대구일중학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"4","valueType":"integerValue"},"totalStock":{"integerValue":"2","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"관음중학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"5","valueType":"integerValue"},"totalDonate":{"integerValue":"6","valueType":"integerValue"}}},"valueType":"mapValue"},"복현중학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"13","valueType":"integerValue"},"totalStock":{"integerValue":"6","valueType":"integerValue"}}},"valueType":"mapValue"},"동변중학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"3","valueType":"integerValue"},"totalDonate":{"integerValue":"6","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"매천중학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"37","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"4","valueType":"integerValue"}}},"valueType":"mapValue"}}},"valueType":"mapValue"},"centerAddress":{"stringValue":"https://m.place.naver.com/place/12183810/home?entry=pll","valueType":"stringValue"},"totalBeforeStock":{"integerValue":"19","valueType":"integerValue"},"shouldBeUpdated":{"booleanValue":false,"valueType":"booleanValue"},"totalBeforeShop":{"integerValue":"1","valueType":"integerValue"},"totalShopped":{"integerValue":"132","valueType":"integerValue"},"totalDonate":{"integerValue":"333","valueType":"integerValue"},"officePhone":{"stringValue":"053-665-3962","valueType":"stringValue"},"centerPhone":{"stringValue":"053-665-2288","valueType":"stringValue"},"highSchool":{"mapValue":{"fields":{"성화여자고등학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"2","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"강북고등학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"47","valueType":"integerValue"},"totalDonate":{"integerValue":"58","valueType":"integerValue"}}},"valueType":"mapValue"},"함지고등학교":{"mapValue":{"fields":{"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"7","valueType":"integerValue"},"totalStock":{"integerValue":"3","valueType":"integerValue"}}},"valueType":"mapValue"},"매천고등학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"1","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"3","valueType":"integerValue"}}},"valueType":"mapValue"},"영송여자고등학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"6","valueType":"integerValue"},"totalDonate":{"integerValue":"7","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"경상고등학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"11","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"19","valueType":"integerValue"}}},"valueType":"mapValue"},"구암고등학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"5","valueType":"integerValue"},"totalDonate":{"integerValue":"10","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"경명여자고등학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"3","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"운암고등학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"9","valueType":"integerValue"}}},"valueType":"mapValue"},"성광고등학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"7","valueType":"integerValue"}}},"valueType":"mapValue"},"대중금속공업고등학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"영진고등학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"대구체육고등학교":{"mapValue":{"fields":{"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalDonate":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"학남고등학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"1","valueType":"integerValue"},"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"경상여자고등학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"11","valueType":"integerValue"},"totalStock":{"integerValue":"0","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"},"칠성고등학교":{"mapValue":{"fields":{"totalDonate":{"integerValue":"1","valueType":"integerValue"},"totalShop":{"integerValue":"0","valueType":"integerValue"},"totalStock":{"integerValue":"0","valueType":"integerValue"}}},"valueType":"mapValue"}}},"valueType":"mapValue"},"totalStock":{"integerValue":"134","valueType":"integerValue"},"totalBeforeDelivery":{"integerValue":"2","valueType":"integerValue"},"updateMent":{"stringValue":"tes\\ntest","valueType":"stringValue"},"officePhoneDonation":{"stringValue":"053-665-3964","valueType":"stringValue"}}
+{
+  "updateMent": { "stringValue": "tes\\ntest", "valueType": "stringValue" },
+  "totalDonate": { "integerValue": "333", "valueType": "integerValue" },
+  "centerAddress": {
+    "stringValue": "https://m.place.naver.com/place/12183810/home?entry=pll",
+    "valueType": "stringValue"
+  },
+  "centerPhone": { "stringValue": "053-665-2288", "valueType": "stringValue" },
+  "totalBeforeDelivery": { "integerValue": "2", "valueType": "integerValue" },
+  "totalStock": { "integerValue": "153", "valueType": "integerValue" },
+  "totalShopped": { "integerValue": "132", "valueType": "integerValue" },
+  "totalBeforeStock": { "integerValue": "0", "valueType": "integerValue" },
+  "officePhone": { "stringValue": "053-665-3962", "valueType": "stringValue" },
+  "middleSchool": {
+    "mapValue": {
+      "fields": {
+        "학남중학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "1",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "6",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "경명여자중학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "19",
+                "valueType": "integerValue"
+              },
+              "totalStock": { "integerValue": "1", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "성광중학교": {
+          "mapValue": {
+            "fields": {
+              "totalDonate": {
+                "integerValue": "25",
+                "valueType": "integerValue"
+              },
+              "totalStock": {
+                "integerValue": "5",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "동변중학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "3",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "6",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "교동중학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "대구체육중학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "구암중학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": {
+                "integerValue": "1",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "5",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "팔달중학교": {
+          "mapValue": {
+            "fields": {
+              "totalDonate": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "매천중학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": {
+                "integerValue": "23",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "37",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "관음중학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "6",
+                "valueType": "integerValue"
+              },
+              "totalStock": { "integerValue": "5", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "강북중학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "12",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "산격중학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "2",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "3",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "복현중학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "6",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "13",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "성화중학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "칠곡중학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "3",
+                "valueType": "integerValue"
+              },
+              "totalStock": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "관천중학교": {
+          "mapValue": {
+            "fields": {
+              "totalDonate": {
+                "integerValue": "6",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": { "integerValue": "4", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "동평중학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "2",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "5",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "대구일중학교": {
+          "mapValue": {
+            "fields": {
+              "totalDonate": {
+                "integerValue": "4",
+                "valueType": "integerValue"
+              },
+              "totalStock": {
+                "integerValue": "2",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "사수중학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "9",
+                "valueType": "integerValue"
+              },
+              "totalStock": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "대구북중학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": {
+                "integerValue": "4",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "5",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "운암중학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "8",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "15",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "침산중학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "5",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "12",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "서변중학교": {
+          "mapValue": {
+            "fields": {
+              "totalDonate": {
+                "integerValue": "4",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": { "integerValue": "3", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        }
+      }
+    },
+    "valueType": "mapValue"
+  },
+  "officePhoneDonation": {
+    "stringValue": "053-665-3964",
+    "valueType": "stringValue"
+  },
+  "shouldBeUpdated": { "booleanValue": false, "valueType": "booleanValue" },
+  "highSchool": {
+    "mapValue": {
+      "fields": {
+        "성화여자고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "2",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "영송여자고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "6",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "7",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "구암고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": {
+                "integerValue": "5",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "10",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "경상여자고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalDonate": {
+                "integerValue": "11",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "함지고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalDonate": {
+                "integerValue": "7",
+                "valueType": "integerValue"
+              },
+              "totalStock": {
+                "integerValue": "3",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "대중금속공업고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "학남고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "1",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "운암고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalDonate": {
+                "integerValue": "9",
+                "valueType": "integerValue"
+              },
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "성광고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "7",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "대구체육고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalDonate": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "경명여자고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "3",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "칠성고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalDonate": {
+                "integerValue": "1",
+                "valueType": "integerValue"
+              },
+              "totalStock": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "강북고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" },
+              "totalStock": {
+                "integerValue": "47",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "58",
+                "valueType": "integerValue"
+              }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "매천고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "1",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "3",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "경상고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "11",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "19",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        },
+        "영진고등학교": {
+          "mapValue": {
+            "fields": {
+              "totalStock": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalDonate": {
+                "integerValue": "0",
+                "valueType": "integerValue"
+              },
+              "totalShop": { "integerValue": "0", "valueType": "integerValue" }
+            }
+          },
+          "valueType": "mapValue"
+        }
+      }
+    },
+    "valueType": "mapValue"
+  },
+  "totalBeforeShop": { "integerValue": "1", "valueType": "integerValue" }
+}

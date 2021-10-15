@@ -7,9 +7,10 @@ const signin = require("router/api/user/signin");
 const update = require("router/api/user/update");
 const logs = require("router/api/user/logs");
 
-router.use("/getData", getData);
+router.use("/", getData);
+router.use("/", update);
+
 router.use("/signin", signin);
-router.use("/update", update);
 router.use("/logs", logs);
 
 module.exports = router;
