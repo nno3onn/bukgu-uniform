@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable comma-dangle */
+/* eslint-disable operator-linebreak */
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
@@ -34,19 +37,20 @@ const Home = () => {
 
     let queries = `?status=${table || "기부승인요청"}`;
     if (search !== "") queries += `&keyword=${search}`;
-    if (table === "기부승인요청" && value !== "전체")
+    if (table === "기부승인요청" && value !== "전체") {
       queries += `&giverDeliveryType=${value}`;
-    else if (
+    } else if (
       (table === "구매승인요청" || table === "출고대기중") &&
       value !== "전체"
-    )
+    ) {
       queries += `&receiverDeliveryType=${value}`;
-    let list = await networkHandler.getApi(
+    }
+    const uniformList = await networkHandler.getApi(
       `${apiRoutes.UNIFORM_LIST}${queries}`
     );
 
-    if (list.data) {
-      const l = list.data;
+    if (uniformList.data) {
+      const l = uniformList.data;
       // if (l.length > 0) setLastDoc(l[l.length - 1]);
       setList(l);
     }
@@ -56,14 +60,15 @@ const Home = () => {
     let queries = `?status=${table || "기부승인요청"}`;
     if (search !== "") queries += `&keyword=${search}`;
     if (table === "기부승인요청") queries += `&giverDeliveryType=${filter}`;
-    else if (table === "구매승인요청" || table === "출고대기중")
+    else if (table === "구매승인요청" || table === "출고대기중") {
       queries += `&receiverDeliveryType=${filter}`;
-    let list = await networkHandler.getApi(
+    }
+    const uniformList = await networkHandler.getApi(
       `${apiRoutes.UNIFORM_LIST}${queries}`
     );
 
-    if (list.data) {
-      const l = list.data;
+    if (uniformList.data) {
+      const l = uniformList.data;
       // if (l.length > 0) setLastDoc(l[l.length - 1]);
       setList(l);
     }
@@ -80,9 +85,9 @@ const Home = () => {
         table === "기부승인요청" ||
         table === "구매승인요청" ||
         table === "출고대기중"
-      )
+      ) {
         setFilter("전체");
-      else setFilter("");
+      } else setFilter("");
       // setLastDoc(null);
       const proms = await Promise.all([
         networkHandler.getApi(`${apiRoutes.INFO_PATH}`),
@@ -92,7 +97,6 @@ const Home = () => {
       ]);
       console.log(proms[0]);
       setLocalInfo(proms[0]);
-      console.log("list:", proms[1].data);
       setList(proms[1].data);
       if (proms[1].data.length > 0) {
         // setLastDoc(proms[1].data[proms[1].data.length - 1]);
@@ -103,9 +107,10 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    table === undefined ? Router.push("/?table=기부승인요청") : req();
-  }, [table]);
+  useEffect(
+    () => (table === undefined ? Router.push("/?table=기부승인요청") : req()),
+    [table]
+  );
 
   const clearList = () => {
     setList();
@@ -148,86 +153,110 @@ const Home = () => {
           <div className={styles["home-heading"]}>교복 기부관리</div>
           <div className={styles["home-content-sorting-row"]}>
             <div>
-              <Link href={`?table=기부승인요청`}>
-                <a
-                  className={
-                    styles[
-                      !table || table === "기부승인요청"
-                        ? "table-filter-btn-active"
-                        : "table-filter-btn-inactive"
-                    ]
-                  }
-                  onClick={clearList}
-                >
+              {table === "기부승인요청" ? (
+                <a className={styles["table-filter-btn-active"]}>
                   {localInfo === null
                     ? null
                     : `기부승인요청 ${localInfo.totalBeforeStock}`}
                 </a>
-              </Link>
-              <Link href={`?table=교복보유중`}>
-                <a
-                  className={
-                    styles[
-                      table === "교복보유중"
-                        ? "table-filter-btn-active"
-                        : "table-filter-btn-inactive"
-                    ]
-                  }
-                  onClick={clearList}
-                >
+              ) : (
+                <Link href="?table=기부승인요청">
+                  <a
+                    role="button"
+                    tabIndex={0}
+                    className={styles["table-filter-btn-inactive"]}
+                    onClick={clearList}
+                  >
+                    {localInfo === null
+                      ? null
+                      : `기부승인요청 ${localInfo.totalBeforeStock}`}
+                  </a>
+                </Link>
+              )}
+
+              {table === "교복보유중" ? (
+                <a className={styles["table-filter-btn-active"]}>
                   {localInfo === null
                     ? null
                     : `교복보유중 ${localInfo.totalStock}`}
                 </a>
-              </Link>
-              <Link href={`?table=구매승인요청`}>
-                <a
-                  className={
-                    styles[
-                      table === "구매승인요청"
-                        ? "table-filter-btn-active"
-                        : "table-filter-btn-inactive"
-                    ]
-                  }
-                  onClick={clearList}
-                >
+              ) : (
+                <Link href="?table=교복보유중">
+                  <a
+                    role="button"
+                    tabIndex={0}
+                    className={styles["table-filter-btn-inactive"]}
+                    onClick={clearList}
+                  >
+                    {localInfo === null
+                      ? null
+                      : `교복보유중 ${localInfo.totalStock}`}
+                  </a>
+                </Link>
+              )}
+
+              {table === "구매승인요청" ? (
+                <a className={styles["table-filter-btn-active"]}>
                   {localInfo === null
                     ? null
                     : `구매승인요청 ${localInfo.totalBeforeShop}`}
                 </a>
-              </Link>
-              <Link href={`?table=출고대기중`}>
-                <a
-                  className={
-                    styles[
-                      table === "출고대기중"
-                        ? "table-filter-btn-active"
-                        : "table-filter-btn-inactive"
-                    ]
-                  }
-                  onClick={clearList}
-                >
+              ) : (
+                <Link href="?table=구매승인요청">
+                  <a
+                    role="button"
+                    tabIndex={0}
+                    className={styles["table-filter-btn-inactive"]}
+                    onClick={clearList}
+                  >
+                    {localInfo === null
+                      ? null
+                      : `구매승인요청 ${localInfo.totalBeforeShop}`}
+                  </a>
+                </Link>
+              )}
+
+              {table === "출고대기중" ? (
+                <a className={styles["table-filter-btn-active"]}>
                   {localInfo === null
                     ? null
                     : `출고대기중 ${localInfo.totalBeforeDelivery}`}
                 </a>
-              </Link>
-              <Link href={`?table=최종완료`}>
-                <a
-                  className={
-                    styles[
-                      table === "최종완료"
-                        ? "table-filter-btn-active"
-                        : "table-filter-btn-inactive"
-                    ]
-                  }
-                  onClick={clearList}
-                >
+              ) : (
+                <Link href="?table=출고대기중">
+                  <a
+                    role="button"
+                    tabIndex={0}
+                    className={styles["table-filter-btn-inactive"]}
+                    onClick={clearList}
+                  >
+                    {localInfo === null
+                      ? null
+                      : `출고대기중 ${localInfo.totalBeforeDelivery}`}
+                  </a>
+                </Link>
+              )}
+
+              {table === "최종완료" ? (
+                <a className={styles["table-filter-btn-active"]}>
                   {localInfo === null
                     ? null
                     : `최종완료 ${localInfo.totalShopped}`}
                 </a>
-              </Link>
+              ) : (
+                <Link href="?table=최종완료">
+                  <a
+                    role="button"
+                    tabIndex={0}
+                    className={styles["table-filter-btn-inactive"]}
+                    onClick={clearList}
+                  >
+                    {localInfo === null
+                      ? null
+                      : `최종완료 ${localInfo.totalShopped}`}
+                  </a>
+                </Link>
+              )}
             </div>
           </div>
           <div className={styles["home-filter-wrapper"]}>
@@ -237,14 +266,15 @@ const Home = () => {
                 onChange={({ target: { value } }) => setSearch(value)}
                 onKeyDown={handleSearchKeyDown}
               />
-              <button>
-                <img src="/icon/search.png" onClick={handleSearch} />
+              <button type="button" onClick={handleSearch}>
+                <img alt="search" src="/icon/search.png" />
               </button>
             </div>
             {table === "기부승인요청" ? (
               <div className={styles["filter-row"]}>
                 <ExcelButton csvData={list} fileName={table} />
                 <button
+                  type="button"
                   className={styles["filter-item"]}
                   onClick={handleFilter("전체")}
                 >
@@ -258,6 +288,7 @@ const Home = () => {
                   전체
                 </button>
                 <button
+                  type="button"
                   className={styles["filter-item"]}
                   onClick={handleFilter("수거 요청")}
                 >
@@ -271,6 +302,7 @@ const Home = () => {
                   수거 요청
                 </button>
                 <button
+                  type="button"
                   className={styles["filter-item"]}
                   onClick={handleFilter("봉사센터 방문")}
                 >
@@ -284,6 +316,7 @@ const Home = () => {
                   봉사센터 방문
                 </button>
                 <button
+                  type="button"
                   className={styles["filter-item"]}
                   onClick={handleFilter("복지센터 방문")}
                 >
@@ -301,6 +334,7 @@ const Home = () => {
             {table === "구매승인요청" || table === "출고대기중" ? (
               <div className={styles["filter-row"]}>
                 <button
+                  type="button"
                   className={styles["filter-item"]}
                   onClick={handleFilter("전체")}
                 >
@@ -314,6 +348,7 @@ const Home = () => {
                   전체
                 </button>
                 <button
+                  type="button"
                   className={styles["filter-item"]}
                   onClick={handleFilter("배송 요청")}
                 >
@@ -327,6 +362,7 @@ const Home = () => {
                   배송 요청
                 </button>
                 <button
+                  type="button"
                   className={styles["filter-item"]}
                   onClick={handleFilter("봉사센터 방문")}
                 >

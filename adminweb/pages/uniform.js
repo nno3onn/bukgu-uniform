@@ -1,13 +1,21 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-return-assign */
+/* eslint-disable consistent-return */
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable indent */
+/* eslint-disable operator-linebreak */
+/* eslint-disable comma-dangle */
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Map, List, update } from "immutable";
+import { Map, List } from "immutable";
 import fetch from "node-fetch";
 
 import onlyNum from "utils/onlyNum";
 import networkHandler from "configs/networkHandler";
 import apiRoutes from "configs/apiRoutes";
-// import updateLocalInfo from "utils/updatelocalInfo";
 
 import Nav from "components/nav";
 import LoadingPage from "components/loading/page";
@@ -43,46 +51,43 @@ const Uniform = () => {
         `${apiRoutes.UNIFORM_PATH}?uniformId=${id}`
       );
 
-      console.log("uniformData:", data["data"]);
-      if (data["data"]) {
-        setUniformInfo(data["data"]);
+      // console.log("uniformData:", data.data);
+      if (data.data) {
+        setUniformInfo(data.data);
 
         setImages(
           List(
-            data["data"].images.map((img) => ({
+            data.data.images.map((img) => ({
               url: networkHandler.getImageFromServer(img),
               file: null,
             }))
           )
         );
-        setSchool(data["data"]["filter-school"]);
-        setGender(data["data"]["filter-gender"]);
-        setSeason(data["data"]["filter-season"]);
+        setSchool(data.data["filter-school"]);
+        setGender(data.data["filter-gender"]);
+        setSeason(data.data["filter-season"]);
         setClothes(
           List(
-            data["data"].uniforms.map(({ clothType, size }) =>
+            data.data.uniforms.map(({ clothType, size }) =>
               Map({ clothType, size })
             )
           )
         );
         setLoading(false);
         if (
-          (data["data"].status === "구매승인요청" &&
-            (!data["data"].receiverCert ||
-              data["data"].receiverCert.length === 0)) ||
-          data["data"].status === "출고대기중"
+          (data.data.status === "구매승인요청" &&
+            (!data.data.receiverCert || data.data.receiverCert.length === 0)) ||
+          data.data.status === "출고대기중"
         ) {
-          setCheckerGiverName(data["data"].receiverName);
-          setCheckerGiverBirth(data["data"].receiverBirth);
+          setCheckerGiverName(data.data.receiverName);
+          setCheckerGiverBirth(data.data.receiverBirth);
         }
-      } else {
-        if (
-          window.confirm(
-            "해당하는 교복 정보가 존재하지 않습니다.\n이전 화면으로 가시겠습니까?"
-          )
-        ) {
-          router.back();
-        }
+      } else if (
+        window.confirm(
+          "해당하는 교복 정보가 존재하지 않습니다.\n이전 화면으로 가시겠습니까?"
+        )
+      ) {
+        router.back();
       }
     } catch (err) {
       console.log(err);
@@ -94,8 +99,8 @@ const Uniform = () => {
   }, []);
 
   const addImages = ({ target: { files } }) => {
-    let _files = [];
-    for (let i = 0; i < files.length; i++) {
+    const _files = [];
+    for (let i = 0; i < files.length; i += 1) {
       _files.push({ file: files[i], url: URL.createObjectURL(files[i]) });
     }
     if (_files.length !== 0) {
@@ -104,22 +109,21 @@ const Uniform = () => {
   };
 
   const removeImg = (index) => () => {
-    let yes;
-    yes = window.confirm(
+    const yes = window.confirm(
       "사진을 삭제하시겠습니까?\n하단에 변경사항저장까지 누르셔야 최종적용됩니다"
     );
 
     if (yes) {
-      const url = images["_tail"].array[index].url.split("/");
+      const url = images._tail.array[index].url.split("/");
 
       if (url[2] !== "firebasestorage.googleapis.com") {
-        const urls = images["_tail"].array[index].url.split("/");
+        const urls = images._tail.array[index].url.split("/");
         const fileName = urls[urls.length - 1];
         setRemoveImages(removeImages.concat(fileName));
       }
       setImages(
-        index == 0
-          ? images.shift().filter((e, i) => e !== undefined)
+        index === 0
+          ? images.shift().filter((e) => e !== undefined)
           : images.remove(index)
       );
     }
@@ -129,8 +133,9 @@ const Uniform = () => {
     setSeason(v);
     const updater = () => getClothesTypes(v)[0];
     let c = clothes;
-    for (let i = 0; i < clothes.size; i++)
+    for (let i = 0; i < clothes.size; i += 1) {
       c = c.updateIn([i, "clothType"], updater);
+    }
     setClothes(c);
   };
 
@@ -164,8 +169,9 @@ const Uniform = () => {
       if (uniformInfo.status === "기부승인요청") updateKey = "totalBeforeStock";
       if (uniformInfo.status === "교복보유중") updateKey = "totalStock";
       if (uniformInfo.status === "구매승인요청") updateKey = "totalBeforeShop";
-      if (uniformInfo.status === "출고대기중")
+      if (uniformInfo.status === "출고대기중") {
         updateKey = "totalBeforeDelivery";
+      }
       if (uniformInfo.status === "최종완료") updateKey = "totalShopped";
 
       const updateData = {
@@ -173,7 +179,7 @@ const Uniform = () => {
       };
 
       if (uniformInfo.status === "교복보유중") {
-        updateData["totalSchool"] = [
+        updateData.totalSchool = [
           uniformInfo["filter-school"].indexOf("고등") === -1
             ? "middleSchools"
             : "highSchools",
@@ -216,33 +222,35 @@ const Uniform = () => {
         images.toJS().map(async ({ file, url }) => {
           if (!file) {
             return url;
-          } else {
-            const filename = `uploads/${
-              uniformInfo.code
-            }_${new Date().getTime()}.png`;
-
-            const formData = new FormData();
-            formData.append("imageFile", file, filename);
-
-            fetch(apiRoutes.API_PATH, {
-              method: "POST",
-              body: formData,
-            })
-              .then((response) => response.json())
-              .catch((error) => console.error("Error:", error));
-            return filename;
           }
+          const filename = `uploads/${
+            uniformInfo.code
+          }_${new Date().getTime()}.png`;
+
+          const formData = new FormData();
+          formData.append("imageFile", file, filename);
+
+          fetch(apiRoutes.API_PATH, {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .catch((error) => console.error("Error:", error));
+          return filename;
         })
       );
 
       const fct = [];
-      clothes.toJS().forEach(({ clothType }) => {
+      clothes.toJS().map(({ clothType }) => {
         if (fct.indexOf(clothType) === -1) fct.push(clothType);
       });
 
-      const uniforms = clothes
-        .toJS()
-        .map((cloth) => ({ ...cloth, school, gender, season }));
+      const uniforms = clothes.toJS().map((cloth) => ({
+        ...cloth,
+        school,
+        gender,
+        season,
+      }));
 
       let title = `${gender} / ${season} - `;
       uniforms.map(
@@ -279,9 +287,9 @@ const Uniform = () => {
       };
 
       const user = await networkHandler.getApi(
-        `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`
+        `${apiRoutes.USER_PATH}?targetUid=${uniformInfo.giverUid}`
       );
-      console.log("user:", user);
+      // console.log("user:", user);
 
       const userData = {
         total: user.alarms.total + 1,
@@ -303,7 +311,7 @@ const Uniform = () => {
         ),
         networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData),
         networkHandler.putApi(
-          `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`,
+          `${apiRoutes.USER_PATH}?targetUid=${uniformInfo.giverUid}`,
           userData
         ),
       ]);
@@ -316,33 +324,35 @@ const Uniform = () => {
       images.map(async ({ file, url }) => {
         if (!file) {
           return url;
-        } else {
-          const filename = `uploads/${
-            uniformInfo.code
-          }_${new Date().getTime()}.png`;
-
-          const formData = new FormData();
-          formData.append("imageFile", file, filename);
-
-          fetch(apiRoutes.API_PATH, {
-            method: "POST",
-            body: formData,
-          })
-            .then((response) => response.json())
-            .catch((error) => console.error("Error:", error));
-          return filename;
         }
+        const filename = `uploads/${
+          uniformInfo.code
+        }_${new Date().getTime()}.png`;
+
+        const formData = new FormData();
+        formData.append("imageFile", file, filename);
+
+        fetch(apiRoutes.API_PATH, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .catch((error) => console.error("Error:", error));
+        return filename;
       })
     );
 
     const fct = [];
-    clothes.toJS().forEach(({ clothType }) => {
+    clothes.toJS().map(({ clothType }) => {
       if (fct.indexOf(clothType) === -1) fct.push(clothType);
     });
 
-    const uniforms = clothes
-      .toJS()
-      .map((cloth) => ({ ...cloth, school, gender, season }));
+    const uniforms = clothes.toJS().map((cloth) => ({
+      ...cloth,
+      school,
+      gender,
+      season,
+    }));
 
     let title = `${gender} / ${season} - `;
     uniforms.map(
@@ -397,11 +407,10 @@ const Uniform = () => {
         networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData2)
       );
 
-      console.log(removeImages.length, Array.isArray(removeImages));
+      // console.log(removeImages.length, Array.isArray(removeImages));
       if (removeImages.length !== 0 && Array.isArray(removeImages)) {
         removeImages.map((fileName) => {
           networkHandler.deleteApi(apiRoutes.API_PATH, fileName);
-          // networkHandler.deleteImageApi(image);
         });
       }
     }
@@ -412,181 +421,172 @@ const Uniform = () => {
   };
 
   const searchLogs = async () => {
-    console.log(
-      "searchLogs:",
-      `${apiRoutes.UNIFORM_SEARCH_RECORD}?nameKeyword=${checkerGiverName}&birthKeyword=${checkerGiverBirth}`
-    );
     const logData = await networkHandler.getApi(
       `${apiRoutes.UNIFORM_SEARCH_RECORD}?nameKeyword=${checkerGiverName}&birthKeyword=${checkerGiverBirth}`
     );
-    setLogs(logData["data"]);
+    setLogs(logData.data);
   };
 
   const rejectShop = async (status, r) => {
     if (checkerGiverName === "" || checkerGiverBirth === "") {
       return alert("구매자 이름과 생년월일을 입력해주세요");
-    } else {
-      if (
-        window.confirm(
-          status === "구매승인요청"
-            ? "정말로 거절하시겠습니까?\n거절된 교복은 다시 유저들에게 공개됩니다"
-            : "정말로 반려하시겠습니까?\n반려된 교복은 다시 유저들에게 공개됩니다"
-        )
-      ) {
-        const infoData =
-          status === "구매승인요청"
-            ? {
-                // totalBeforeShop: -1,
-                // totalStock: 1,
-              }
-            : {
-                totalBeforeDelivery: -1,
-                totalStock: 1,
-              };
+    }
+    if (
+      window.confirm(
+        status === "구매승인요청"
+          ? "정말로 거절하시겠습니까?\n거절된 교복은 다시 유저들에게 공개됩니다"
+          : "정말로 반려하시겠습니까?\n반려된 교복은 다시 유저들에게 공개됩니다"
+      )
+    ) {
+      const infoData =
+        status === "구매승인요청"
+          ? {}
+          : {
+              totalBeforeDelivery: -1,
+              totalStock: 1,
+            };
 
-        const infoData2 = {
-          totalSchool: [
-            school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
-            school,
-            "totalStock",
-            1,
-          ],
-        };
-        console.log("status", status, "infoData:", infoData);
+      const infoData2 = {
+        totalSchool: [
+          school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
+          school,
+          "totalStock",
+          1,
+        ],
+      };
+      // console.log("status", status, "infoData:", infoData);
 
-        const uniformData = {
-          status: "교복보유중",
-        };
+      const uniformData = {
+        status: "교복보유중",
+      };
 
-        const userLogData = {
-          uniformId: id,
-          showStatus: status === "구매승인요청" ? "거절" : "반려",
-          why: r,
-        };
+      const userLogData = {
+        uniformId: id,
+        showStatus: status === "구매승인요청" ? "거절" : "반려",
+        why: r,
+      };
 
-        const user = await networkHandler.getApi(
-          `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`
-        );
-        const userData = {
-          total: user.alarms.total + 1,
-          uniformShop: user.alarms.uniformShop + 1,
-        };
+      const user = await networkHandler.getApi(
+        `${apiRoutes.USER_PATH}?targetUid=${uniformInfo.giverUid}`
+      );
+      const userData = {
+        total: user.alarms.total + 1,
+        uniformShop: user.alarms.uniformShop + 1,
+      };
 
-        const uniformTransferRecordData = {
-          uid: uniformInfo.receiverUid,
-          name: checkerGiverName,
-          birth: checkerGiverBirth,
-          school: school,
-          cert: uniformInfo.receiverCert,
-          season: season,
-          gender: gender,
-          uniforms: clothes.toJS().map((cloth) => ({ ...cloth })),
-          confirm: "거절",
-        };
+      const uniformTransferRecordData = {
+        uid: uniformInfo.receiverUid,
+        name: checkerGiverName,
+        birth: checkerGiverBirth,
+        school,
+        cert: uniformInfo.receiverCert,
+        season,
+        gender,
+        uniforms: clothes.toJS().map((cloth) => ({ ...cloth })),
+        confirm: "거절",
+      };
 
-        try {
-          await Promise.all([
-            networkHandler.putApi(
-              `${apiRoutes.UNIFORM_REJECT_PURCHASE}?uniformId=${id}`,
-              uniformTransferRecordData
-            ),
-            networkHandler.putApi(
-              `${apiRoutes.USER_LOGS_UNIFORM_DONATE}`,
-              userLogData
-            ),
-            networkHandler.putApi(
-              `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`,
-              userData
-            ),
-            networkHandler.putApi(
-              `${apiRoutes.UNIFORM_PATH}?uniformId=${uniformInfo["uniformId"]}`,
-              uniformData
-            ),
-            networkHandler.postApi(`${apiRoutes.INFO_PATH}`, infoData),
-            networkHandler.postApi(`${apiRoutes.INFO_PATH}`, infoData2),
-          ]);
-        } catch (err) {
-          console.log(err);
-        }
-        router.back();
+      try {
+        await Promise.all([
+          networkHandler.putApi(
+            `${apiRoutes.UNIFORM_REJECT_PURCHASE}?uniformId=${id}`,
+            uniformTransferRecordData
+          ),
+          networkHandler.putApi(
+            `${apiRoutes.USER_LOGS_UNIFORM_DONATE}`,
+            userLogData
+          ),
+          networkHandler.putApi(
+            `${apiRoutes.USER_PATH}?targetUid=${uniformInfo.giverUid}`,
+            userData
+          ),
+          networkHandler.putApi(
+            `${apiRoutes.UNIFORM_PATH}?uniformId=${uniformInfo.uniformId}`,
+            uniformData
+          ),
+          networkHandler.postApi(`${apiRoutes.INFO_PATH}`, infoData),
+          networkHandler.postApi(`${apiRoutes.INFO_PATH}`, infoData2),
+        ]);
+      } catch (err) {
+        console.log(err);
       }
+      router.back();
     }
   };
   const confirmShop = async () => {
     if (checkerGiverName === "" || checkerGiverBirth === "") {
       return alert("구매자 이름과 생년월일을 입력해주세요");
-    } else {
-      if (window.confirm("구매승인을 하시겠습니까?")) {
-        const userLogData = {
-          uniformId: id,
-          showStatus: `승인 - ${
-            uniformInfo.receiverDeliveryType === "배송 요청"
-              ? "배송예정"
-              : "방문수령필요"
-          }`,
-        };
+    }
+    if (window.confirm("구매승인을 하시겠습니까?")) {
+      const userLogData = {
+        uniformId: id,
+        showStatus: `승인 - ${
+          uniformInfo.receiverDeliveryType === "배송 요청"
+            ? "배송예정"
+            : "방문수령필요"
+        }`,
+      };
 
-        const commonData = {
-          totalSchool: [
-            school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
-            school,
-            "totalStock",
-            -1,
-          ],
-        };
+      const commonData = {
+        totalSchool: [
+          school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
+          school,
+          "totalStock",
+          -1,
+        ],
+      };
 
-        const commonData2 = {
-          totalSchool: [
-            school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
-            school,
-            "totalShop",
-            1,
-          ],
-        };
+      const commonData2 = {
+        totalSchool: [
+          school.indexOf("고등") === -1 ? "middleSchools" : "highSchools",
+          school,
+          "totalShop",
+          1,
+        ],
+      };
 
-        const user = await networkHandler.getApi(
-          `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`
-        );
+      const user = await networkHandler.getApi(
+        `${apiRoutes.USER_PATH}?targetUid=${uniformInfo.giverUid}`
+      );
 
-        const userData = {
-          total: user.alarms.total + 1,
-          uniformShop: user.alarms.uniformShop + 1,
-        };
+      const userData = {
+        total: user.alarms.total + 1,
+        uniformShop: user.alarms.uniformShop + 1,
+      };
 
-        const uniformTransferRecordData = {
-          uid: uniformInfo.receiverUid,
-          name: checkerGiverName,
-          birth: checkerGiverBirth,
-          school: school,
-          cert: uniformInfo.receiverCert,
-          season: season,
-          gender: gender,
-          uniforms: clothes.toJS().map((cloth) => ({ ...cloth })),
-          confirm: "승인",
-        };
+      const uniformTransferRecordData = {
+        uid: uniformInfo.receiverUid,
+        name: checkerGiverName,
+        birth: checkerGiverBirth,
+        school,
+        cert: uniformInfo.receiverCert,
+        season,
+        gender,
+        uniforms: clothes.toJS().map((cloth) => ({ ...cloth })),
+        confirm: "승인",
+      };
 
-        try {
-          await Promise.all([
-            networkHandler.putApi(
-              `${apiRoutes.UNIFORM_CONFIRM_PURCHASE}?uniformId=${id}`,
-              uniformTransferRecordData
-            ),
-            networkHandler.putApi(
-              `${apiRoutes.USER_LOGS_UNIFORM_DONATE}`,
-              userLogData
-            ),
-            networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData),
-            networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData2),
-            networkHandler.putApi(
-              `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`,
-              userData
-            ),
-          ]);
-        } catch (err) {
-          console.log(err);
-        }
-        router.back();
+      try {
+        await Promise.all([
+          networkHandler.putApi(
+            `${apiRoutes.UNIFORM_CONFIRM_PURCHASE}?uniformId=${id}`,
+            uniformTransferRecordData
+          ),
+          networkHandler.putApi(
+            `${apiRoutes.USER_LOGS_UNIFORM_DONATE}`,
+            userLogData
+          ),
+          networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData),
+          networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData2),
+          networkHandler.putApi(
+            `${apiRoutes.USER_PATH}?targetUid=${uniformInfo.giverUid}`,
+            userData
+          ),
+        ]);
+      } catch (err) {
+        console.log(err);
       }
+      return router.back();
     }
   };
   const confirmDelivery = async () => {
@@ -606,7 +606,7 @@ const Uniform = () => {
       };
 
       const user = await networkHandler.getApi(
-        `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`
+        `${apiRoutes.USER_PATH}?targetUid=${uniformInfo.giverUid}`
       );
 
       const userData = {
@@ -626,7 +626,7 @@ const Uniform = () => {
           ),
           networkHandler.postApi(`${apiRoutes.INFO_PATH}`, commonData),
           networkHandler.putApi(
-            `${apiRoutes.USER_PATH}?targetUid=${uniformInfo["giverUid"]}`,
+            `${apiRoutes.USER_PATH}?targetUid=${uniformInfo.giverUid}`,
             userData
           ),
         ]);
@@ -661,14 +661,21 @@ const Uniform = () => {
           <div className={styles["uniform-heading-wrapper"]}>
             <div className={styles["uniform-heading"]}>
               <button
+                type="button"
                 className={styles["back-button"]}
                 onClick={() => router.back()}
               >
-                <img src="/icon/back.png" width="24px" height="24px" />
+                <img
+                  alt="back"
+                  src="/icon/back.png"
+                  width="24px"
+                  height="24px"
+                />
               </button>
               {uniformInfo.code}
             </div>
             <button
+              type="button"
               className={styles["uniform-delete"]}
               onClick={handleUniformDelete}
             >
@@ -679,60 +686,60 @@ const Uniform = () => {
           <div className={styles["uniform-label"]}>상세정보</div>
           <div className={styles["uniform-giver-table-wrapper"]}>
             <div className={styles["uniform-giver-table"]}>
-              <div className={styles["row"]}>
-                <div className={styles["col1"]}>기부자</div>
-                <div className={styles["col2"]}>{uniformInfo.giverName}</div>
+              <div className={styles.row}>
+                <div className={styles.col1}>기부자</div>
+                <div className={styles.col2}>{uniformInfo.giverName}</div>
               </div>
-              <div className={styles["row"]}>
-                <div className={styles["col1"]}>연락처</div>
-                <div
-                  className={styles["col2"]}
-                >{`${uniformInfo.giverPhone.substring(
-                  0,
-                  3
-                )}-${uniformInfo.giverPhone.substring(
-                  3,
-                  7
-                )}-${uniformInfo.giverPhone.substring(7, 11)}`}</div>
+              <div className={styles.row}>
+                <div className={styles.col1}>연락처</div>
+                <div className={styles.col2}>
+                  {`${uniformInfo.giverPhone.substring(
+                    0,
+                    3
+                  )}-${uniformInfo.giverPhone.substring(
+                    3,
+                    7
+                  )}-${uniformInfo.giverPhone.substring(7, 11)}`}
+                </div>
               </div>
-              <div className={styles["row"]}>
-                <div className={styles["col1"]}>수거 방법</div>
-                <div className={styles["col2"]}>
+              <div className={styles.row}>
+                <div className={styles.col1}>수거 방법</div>
+                <div className={styles.col2}>
                   {uniformInfo.giverDeliveryType}
                 </div>
               </div>
-              <div className={styles["row"]}>
-                <div className={styles["col1"]}>
+              <div className={styles.row}>
+                <div className={styles.col1}>
                   {uniformInfo.giverDeliveryType === "복지센터 방문"
                     ? "방문 복지센터"
                     : "주소"}
                 </div>
-                <div className={styles["col2"]}>
+                <div className={styles.col2}>
                   {uniformInfo.giverAddress || "-"}
                 </div>
               </div>
-              <div className={styles["row"]}>
-                <div className={styles["col1"]}>기부 신청일</div>
-                <div
-                  className={styles["col2"]}
-                >{`20${uniformInfo.code.substring(
-                  0,
-                  2
-                )}. ${uniformInfo.code.substring(
-                  2,
-                  4
-                )}. ${uniformInfo.code.substring(4, 6)}`}</div>
+              <div className={styles.row}>
+                <div className={styles.col1}>기부 신청일</div>
+                <div className={styles.col2}>
+                  {`20${uniformInfo.code.substring(
+                    0,
+                    2
+                  )}. ${uniformInfo.code.substring(
+                    2,
+                    4
+                  )}. ${uniformInfo.code.substring(4, 6)}`}
+                </div>
               </div>
               {uniformInfo.status !== "기부승인요청" ? (
-                <div className={styles["row"]}>
-                  <div className={styles["col1"]}>입고일</div>
-                  <div className={styles["col2"]}>{ds1}</div>
+                <div className={styles.row}>
+                  <div className={styles.col1}>입고일</div>
+                  <div className={styles.col2}>{ds1}</div>
                 </div>
               ) : null}
               {uniformInfo.status === "기부승인요청" ||
               uniformInfo.status === "교복보유중" ? (
-                <div className={styles["row"]}>
-                  <div className={styles["col1"]}>현재 상태</div>
+                <div className={styles.row}>
+                  <div className={styles.col1}>현재 상태</div>
                   <div className={styles["col2-status"]}>
                     {uniformInfo.status}
                   </div>
@@ -743,42 +750,42 @@ const Uniform = () => {
             uniformInfo.status === "교복보유중" ? null : (
               <div className={styles.margin24}>
                 <div className={styles["uniform-giver-table"]}>
-                  <div className={styles["row"]}>
-                    <div className={styles["col1"]}>구매(희망)자</div>
-                    <div className={styles["col2"]}>
+                  <div className={styles.row}>
+                    <div className={styles.col1}>구매(희망)자</div>
+                    <div className={styles.col2}>
                       {uniformInfo.receiverName}
                     </div>
                   </div>
-                  <div className={styles["row"]}>
-                    <div className={styles["col1"]}>연락처</div>
-                    <div
-                      className={styles["col2"]}
-                    >{`${uniformInfo.receiverPhone.substring(
-                      0,
-                      3
-                    )}-${uniformInfo.receiverPhone.substring(
-                      3,
-                      7
-                    )}-${uniformInfo.receiverPhone.substring(7, 11)}`}</div>
+                  <div className={styles.row}>
+                    <div className={styles.col1}>연락처</div>
+                    <div className={styles.col2}>
+                      {`${uniformInfo.receiverPhone.substring(
+                        0,
+                        3
+                      )}-${uniformInfo.receiverPhone.substring(
+                        3,
+                        7
+                      )}-${uniformInfo.receiverPhone.substring(7, 11)}`}
+                    </div>
                   </div>
-                  <div className={styles["row"]}>
-                    <div className={styles["col1"]}>주소</div>
-                    <div className={styles["col2"]}>
+                  <div className={styles.row}>
+                    <div className={styles.col1}>주소</div>
+                    <div className={styles.col2}>
                       {uniformInfo.receiverAddress || "-"}
                     </div>
                   </div>
-                  <div className={styles["row"]}>
-                    <div className={styles["col1"]}>수거 방법</div>
-                    <div className={styles["col2"]}>
+                  <div className={styles.row}>
+                    <div className={styles.col1}>수거 방법</div>
+                    <div className={styles.col2}>
                       {uniformInfo.receiverDeliveryType}
                     </div>
                   </div>
-                  <div className={styles["row"]}>
-                    <div className={styles["col1"]}>구매 신청일</div>
-                    <div className={styles["col2"]}>{uniformInfo.dateShop}</div>
+                  <div className={styles.row}>
+                    <div className={styles.col1}>구매 신청일</div>
+                    <div className={styles.col2}>{uniformInfo.dateShop}</div>
                   </div>
-                  <div className={styles["row"]}>
-                    <div className={styles["col1"]}>현재 상태</div>
+                  <div className={styles.row}>
+                    <div className={styles.col1}>현재 상태</div>
                     <div className={styles["col2-status"]}>
                       {uniformInfo.status}
                     </div>
@@ -796,16 +803,16 @@ const Uniform = () => {
           />
           <div className={styles["uniform-label"]}>교복사진</div>
           <label className={styles.add} htmlFor="imgs">
-            <img src="/icon/add.png" />
+            <img alt="add" src="/icon/add.png" />
             사진 추가
           </label>
           <div className={styles["uniform-photos-wrapper"]}>
             {images.size === 0
-              ? ""
-              : images.map((image, i) => {
-                  return image.url === null ? (
-                    ""
-                  ) : (
+              ? null
+              : // eslint-disable-next-line no-confusing-arrow
+                images.map((image, i) =>
+                  // eslint-disable-next-line implicit-arrow-linebreak
+                  image.url === null ? null : (
                     <div
                       key={String(i)}
                       className={
@@ -815,13 +822,14 @@ const Uniform = () => {
                       }
                     >
                       <button
+                        type="button"
                         className={styles["thumbnails-bg"]}
                         onClick={removeImg(i)}
                       >
                         사진 삭제
                       </button>
                       <div
-                        className={styles["thumbnails"]}
+                        className={styles.thumbnails}
                         style={{
                           backgroundImage: `url(${
                             image.url.indexOf("uploads/") !== -1
@@ -831,13 +839,13 @@ const Uniform = () => {
                         }}
                       />
                     </div>
-                  );
-                })}
+                  )
+                )}
           </div>
           <div className={styles["uniform-label"]}>품목</div>
-          <button onClick={addCloth}>
+          <button type="button" onClick={addCloth}>
             <label className={styles.add}>
-              <img src="/icon/add.png" />
+              <img alt="add" src="/icon/add.png" />
               품목 추가
             </label>
           </button>
@@ -880,8 +888,12 @@ const Uniform = () => {
                     }
                   />
                 </div>
-                <button className={styles.delete} onClick={removeCloth(i)}>
-                  <img src="/icon/close.png" />
+                <button
+                  type="button"
+                  className={styles.delete}
+                  onClick={removeCloth(i)}
+                >
+                  <img alt="close" src="/icon/close.png" />
                 </button>
               </div>
             ))}
@@ -931,6 +943,7 @@ const Uniform = () => {
                 maxLength="8"
               />
               <button
+                type="button"
                 className={styles["uniform-inner-btn"]}
                 onClick={searchLogs}
               >
@@ -945,16 +958,15 @@ const Uniform = () => {
                     <div className={styles.col4}>승인여부</div>
                   </div>
                   {logs.map((log, i) => {
-                    console.log("logs(", i, "):", log);
                     const d = log.uniformId.split("-")[0];
                     const ds = `20${d.substring(0, 2)}. ${d.substring(
                       2,
                       4
                     )}. ${d.substring(4, 6)}`;
                     let item = `${log.gender} / ${log.season} / `;
-                    log.uniforms.forEach(({ clothType }) => {
-                      item += `${clothType},`;
-                    });
+                    log.uniforms.map(
+                      ({ clothType }) => (item += `${clothType},`)
+                    );
                     return (
                       <div className={styles.row} key={String(i)}>
                         <div className={styles.col1}>{ds}</div>
@@ -970,37 +982,55 @@ const Uniform = () => {
           ) : null}
           <div className={styles["uniform-btn-wrapper"]}>
             {uniformInfo.status === "교복보유중" ? (
-              <button className={styles.update} onClick={handleUpdate}>
+              <button
+                type="button"
+                className={styles.update}
+                onClick={handleUpdate}
+              >
                 변경사항 저장
               </button>
             ) : null}
             {uniformInfo.status === "구매승인요청" ? (
               <>
                 <button
+                  type="button"
                   className={styles.reject}
                   onClick={() => setRejectModalOpen(true)}
                 >
                   거절
-                </button>{" "}
-                <button className={styles.confirm} onClick={confirmShop}>
+                </button>
+                <button
+                  type="button"
+                  className={styles.confirm}
+                  onClick={confirmShop}
+                >
                   구매승인
                 </button>
               </>
             ) : null}
             {uniformInfo.status === "기부승인요청" ? (
-              <button className={styles.confirm} onClick={handleStockConfirm}>
+              <button
+                type="button"
+                className={styles.confirm}
+                onClick={handleStockConfirm}
+              >
                 교복등록
               </button>
             ) : null}
             {uniformInfo.status === "출고대기중" ? (
               <>
                 <button
+                  type="button"
                   className={styles.reject}
                   onClick={() => setRejectModalOpen(true)}
                 >
                   반려하기
                 </button>
-                <button className={styles.confirm} onClick={confirmDelivery}>
+                <button
+                  type="button"
+                  className={styles.confirm}
+                  onClick={confirmDelivery}
+                >
                   교복전달완료
                 </button>
               </>

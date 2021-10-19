@@ -21,7 +21,7 @@ const LoadingPage = () => {
       <Head>
         <title>대구 북구 교복 나누미 | 로딩중..</title>
       </Head>
-      <img ref={imgRef} />
+      <img alt="loading" ref={imgRef} />
     </div>
   );
 };

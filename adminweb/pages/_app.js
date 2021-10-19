@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/prop-types */
 import AuthHoC from "components/hocs/auth";
 
 import "styles/globals.scss";

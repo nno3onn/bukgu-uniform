@@ -66,7 +66,7 @@ const deleteApi = async (url, data) => {
     const res = await fetch(`${url}/${data}`, options);
     return res.json();
   } catch (err) {
-    console.log(err);
+    return console.log(err);
   }
 };
 
@@ -85,7 +85,7 @@ const postImageApi = async ({ files }) => {
     const res = await fetch(`${apiRoutes.SERVER_PATH}/uploads`, options);
     return res.json();
   } catch (err) {
-    console.log(err);
+    return console.log(err);
   }
 };
 

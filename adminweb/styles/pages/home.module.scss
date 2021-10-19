@@ -27,10 +27,11 @@
 }
 
 .table-filter-btn-active {
+  cursor: pointer;
   margin-right: 24px;
   font-size: 20px;
   font-weight: bold;
-  color: #FF4A68;
+  color: #ff4a68;
 }
 
 .table-filter-btn-inactive {
@@ -96,7 +97,7 @@
   }
   .inactive {
     margin-right: 8px;
-    border: 1px solid #C5C5D1;
+    border: 1px solid #c5c5d1;
     width: 16px;
     height: 16px;
     border-radius: 50%;

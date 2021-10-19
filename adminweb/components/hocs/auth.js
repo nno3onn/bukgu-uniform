@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import LoadingPage from "components/loading/page";
 import EntrancePage from "components/entrance/page";
 import networkHandler from "configs/networkHandler";
-import apiRoutes, { USER_PATH } from "configs/apiRoutes";
+import apiRoutes from "configs/apiRoutes";
 
 const AuthHoC = ({ children }) => {
   const [loading, setLoading] = useState(true);

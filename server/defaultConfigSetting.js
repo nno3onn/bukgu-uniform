@@ -17,7 +17,7 @@ const setting = async () => {
 
   const middleSchools = {};
   const highSchools = {};
-  schools.middleSchools.forEach((s) => {
+  schools.middleSchools.map((s) => {
     middleSchools[s] = {
       totalDonate: 0,
       totalShop: 0,
@@ -25,7 +25,7 @@ const setting = async () => {
     };
   });
 
-  schools.highSchools.forEach((s) => {
+  schools.highSchools.map((s) => {
     highSchools[s] = {
       totalDonate: 0,
       totalShop: 0,

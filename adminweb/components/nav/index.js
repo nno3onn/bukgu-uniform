@@ -28,7 +28,11 @@ const Nav = () => {
           </Link>
         </div>
         <div className={styles["nav-right-section"]}>
-          <button className={styles["nav-signout-btn"]} onClick={handleSignOut}>
+          <button
+            type="button"
+            className={styles["nav-signout-btn"]}
+            onClick={handleSignOut}
+          >
             로그아웃
           </button>
         </div>

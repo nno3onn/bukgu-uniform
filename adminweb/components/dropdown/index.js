@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import styles from "styles/components/dropdown.module.scss";
 import { middleSchools, highSchools } from "configs/school";
@@ -37,12 +37,17 @@ const Dropdown = ({
   return (
     <div className={styles[`dropdown-margin-${update}`]}>
       <button
+        type="button"
         className={styles[`dropdown-wrapper-${type}`]}
         onClick={update ? () => setOpen(true) : undefined}
       >
         <div className={styles["dropdown-value"]}>{value}</div>
         {update ? (
-          <img src="/icon/arrow-down.png" className={styles.arrow} />
+          <img
+            src="/icon/arrow-down.png"
+            className={styles.arrow}
+            alt="down-arrow"
+          />
         ) : null}
       </button>
       {open ? (
@@ -50,14 +55,23 @@ const Dropdown = ({
           {type === "school" ? (
             <>
               <button
+                type="button"
                 onClick={handleChange(value)}
                 className={styles["dropdown-contents-value"]}
               >
                 <div>{value}</div>
-                <img src="/icon/arrow-up.png" className={styles.arrow} />
+                <img
+                  alt="down-arrow"
+                  src="/icon/arrow-up.png"
+                  className={styles.arrow}
+                />
               </button>
               {schools.map((school, i) => (
-                <button key={String(i)} onClick={handleChange(school)}>
+                <button
+                  type="button"
+                  key={String(i)}
+                  onClick={handleChange(school)}
+                >
                   {school}
                 </button>
               ))}
@@ -66,42 +80,73 @@ const Dropdown = ({
           {type === "gender" ? (
             <>
               <button
+                type="button"
                 onClick={handleChange(value)}
                 className={styles["dropdown-contents-value"]}
               >
                 <div>{value}</div>
-                <img src="/icon/arrow-up.png" className={styles.arrow} />
+                <img
+                  alt="down-arrow"
+                  src="/icon/arrow-up.png"
+                  className={styles.arrow}
+                />
               </button>
-              <button onClick={handleChange("남자")}>남자</button>
-              <button onClick={handleChange("여자")}>여자</button>
+              <button type="button" onClick={handleChange("남자")}>
+                남자
+              </button>
+              <button type="button" onClick={handleChange("여자")}>
+                여자
+              </button>
             </>
           ) : null}
           {type === "season" ? (
             <>
               <button
+                type="button"
                 onClick={handleChange(value)}
                 className={styles["dropdown-contents-value"]}
               >
                 <div>{value}</div>
-                <img src="/icon/arrow-up.png" className={styles.arrow} />
+                <img
+                  alt="down-arrow"
+                  src="/icon/arrow-up.png"
+                  className={styles.arrow}
+                />
               </button>
-              <button onClick={handleChange("동복")}>동복</button>
-              <button onClick={handleChange("하복")}>하복</button>
-              <button onClick={handleChange("생활복")}>생활복</button>
-              <button onClick={handleChange("체육복")}>체육복</button>
+              <button type="button" onClick={handleChange("동복")}>
+                동복
+              </button>
+              <button type="button" onClick={handleChange("하복")}>
+                하복
+              </button>
+              <button type="button" onClick={handleChange("생활복")}>
+                생활복
+              </button>
+              <button type="button" onClick={handleChange("체육복")}>
+                체육복
+              </button>
             </>
           ) : null}
           {type === "cloth" ? (
             <>
               <button
+                type="button"
                 onClick={handleChange(value)}
                 className={styles["dropdown-contents-value"]}
               >
                 <div>{value}</div>
-                <img src="/icon/arrow-up.png" className={styles.arrow} />
+                <img
+                  alt="down-arrow"
+                  src="/icon/arrow-up.png"
+                  className={styles.arrow}
+                />
               </button>
               {getClothesTypes(parentType).map((cloth, i) => (
-                <button key={String(i)} onClick={handleChange(cloth)}>
+                <button
+                  type="button"
+                  key={String(i)}
+                  onClick={handleChange(cloth)}
+                >
                   {cloth}
                 </button>
               ))}
@@ -112,5 +157,7 @@ const Dropdown = ({
     </div>
   );
 };
-
+// Dropdown.propTypes = {
+//   type: PropTypes.string.isRequired,
+// };
 export default Dropdown;

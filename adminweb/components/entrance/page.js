@@ -27,11 +27,11 @@ const EntrancePage = () => {
         password,
       });
 
-      if (data["success"]) {
-        window.localStorage.setItem("x-access-token", data["token"]);
+      if (data.success) {
+        window.localStorage.setItem("x-access-token", data.token);
         router.reload();
       } else {
-        alert(data["error"] ? data["error"] : "잠시 후 시도해주세요");
+        alert(data.error ? data.error : "잠시 후 시도해주세요");
       }
     } catch (err) {
       console.log(err);
@@ -49,7 +49,11 @@ const EntrancePage = () => {
       <Head>
         <title>대구 북구 교복 나누미 | 로그인</title>
       </Head>
-      <img src="/img/bookie.png" className={styles["entrancePage-bookie"]} />
+      <img
+        alt="bookie"
+        src="/img/bookie.png"
+        className={styles["entrancePage-bookie"]}
+      />
       <div className={styles["entrancePage-title"]}>대구 북구 교복 나눔</div>
       <div className={styles["entrancePage-input-section"]}>
         <div className={styles["entrancePage-input-label"]}>이메일</div>
@@ -69,6 +73,7 @@ const EntrancePage = () => {
           onChange={({ target: { value } }) => setPassword(value)}
         />
         <button
+          type="button"
           className={styles["entrancePage-sign-btn"]}
           onClick={handleSubmit}
         >

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import styles from "styles/components/modal.module.scss";
 
@@ -8,8 +8,12 @@ const RejectModal = ({ closeModal, handleReject, status }) => {
   return (
     <div className={styles["modal-wrapper"]}>
       <div className={styles["modal-row-end1"]}>
-        <button className={styles["modal-close-wrapper"]} onClick={closeModal}>
-          <img src="/icon/close-white.png" />
+        <button
+          type="button"
+          className={styles["modal-close-wrapper"]}
+          onClick={closeModal}
+        >
+          <img alt="close" src="/icon/close-white.png" />
           <div>닫기</div>
         </button>
       </div>
@@ -29,7 +33,7 @@ const RejectModal = ({ closeModal, handleReject, status }) => {
           onChange={({ target: { value } }) => setReject(value)}
           value={reject}
         />
-        <button onClick={() => handleReject(reject)}>
+        <button type="button" onClick={() => handleReject(reject)}>
           {status === "구매승인요청" ? "거절" : "반려"}
         </button>
       </div>
